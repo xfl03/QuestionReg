@@ -9,6 +9,7 @@ public class CommandSet {
 	
 	public final static String CRLF="\r\n";
 	public final static String CONSOLE="CONSOLE"+(Math.random()*100000);
+	public final static String SPLIT_LINE="---------------";
 	
 	public static final String[] SYSTEM_ERROR={"[ERROR] System ERROR."};
 	public static final String[] EMPTY_RETURN_TEXT={"[ERROR] Empty return text."};
@@ -21,6 +22,12 @@ public class CommandSet {
 		}
 		returnText+=CRLF;
 		returnText+=text;
+	}
+	public void attendSplitLineToReturnText(){
+		attendReturnText(SPLIT_LINE);
+	}
+	public void attendBlankLineToReturnText(){
+		attendReturnText("");
 	}
 	
 	public String[] getReturnText(){

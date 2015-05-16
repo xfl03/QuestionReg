@@ -63,8 +63,10 @@ public class APIHandler {
 				return "Not exist user.";
 			}
 			if(rs.getString("password").equalsIgnoreCase(EncodeTool.encodeByMD5(password.get(0)))){
+				Calendar now = Calendar.getInstance();
 				token=EncodeTool.encodeByMD5("TOKEN-"+System.currentTimeMillis()+Math.random());
-				String querySQL="update user SET token='"+token+"',logip='"+clientIP+"' "
+				String querySQL="update user SET token='"+token+"',logip='"+clientIP+"',logdate= '"
+					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"'"
 						+ "WHERE username='"+username.get(0)+"'";
 				mainPool.veriSQL.st.update(querySQL);
 				return "Success.";
@@ -129,8 +131,9 @@ public class APIHandler {
 			mainPool.veriSQL.st.update("insert into user values"
 					+ "('"+username.get(0)+"','"+EncodeTool.encodeByMD5(password.get(0))+"',"
 					+ "'"+token+"','"+email.get(0)+"',"+age.get(0)+",'"
+					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"','"
 					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"',"
-					+ "0,0,'"+clientIP+"','"+clientIP+"');");
+					+ "0,0,0,'"+clientIP+"','"+clientIP+"');");
 			return "Success.";
 		} catch (Exception e) {
 			return "SQL ERROR."+e.getMessage();

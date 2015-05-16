@@ -141,7 +141,6 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 					fis.read(buf, 0,lastSize);
 					response.content().writeBytes(buf);
 					
-					
 				} catch (IOException e) {
 					e.printStackTrace();
 					hrs=HttpResponseStatus.INTERNAL_SERVER_ERROR;

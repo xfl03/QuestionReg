@@ -1,6 +1,20 @@
-#QuestionReg Config
+#QuestionReg Main Configuration
+#QuestionReg 1.0.0-4
+#2015.5.16 20:00(GMT+8)
+
+#If user's score reaches to this, user will pass the examination
 passing-score=80
+
+#The number of questions in exam for user
 question-number=20
+
+#If user should be verified by administration before join game
+#In other word, if it is true, user cannot join game before verified by admin 
 need-admin-verify=false
+
+#Display Language
+#Support 'en', 'zh-cn'
 language=en
+
+#Port to run Http Server
 http-server-port=1024

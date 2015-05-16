@@ -15,17 +15,16 @@ public class ConfigTool {
 			fr = new FileReader(configFile);
 			br=new BufferedReader(fr);
 			String s;
-	        while((s=br.readLine())!=null){
-	            if(!s.startsWith("#")&&!s.equalsIgnoreCase("")){
-	            	String[] t=s.split("=");
-	            	if(t.length==2){
-	            		config.put(t[0], t[1]);
-	            	}else if(t.length>2){
-	            		config.put(t[0], s.replaceAll(t[0]+"=",""));
-	            	}
-	            }
-	        }
-	        
+			while((s=br.readLine())!=null){
+				if(!s.startsWith("#")&&!s.equalsIgnoreCase("")){
+					String[] t=s.split("=");
+					if(t.length==2){
+						config.put(t[0], t[1]);
+					}else if(t.length>2){
+						config.put(t[0], s.replaceAll(t[0]+"=",""));
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class QuestionReg extends JavaPlugin {
     
-    private final PlayerListener playerListener = new PlayerListener();
+    private PlayerListener playerListener = null;
     private HttpServerThread hst=null ;
     private Thread hstt=null;
 	public static final String PLUGIN_NAME="QuestionReg";
@@ -22,14 +22,16 @@ public class QuestionReg extends JavaPlugin {
 	private MainPool mainPool=null;
     @Override
     public  void onEnable(){
+        //Init Main Pool
+        mainPool=new MainPool();
+        
     	//Register PlayerListener
+    	playerListener = new PlayerListener(mainPool);
     	PluginManager pm = getServer().getPluginManager();
         pm.registerEvents((Listener) playerListener, this);
         
         //Register Command
-        getCommand("questionreg").setExecutor(new QRCommand());
-        //Init Main Pool
-        mainPool=new MainPool();
+        getCommand("questionreg").setExecutor(new QRCommand(mainPool));
         
         //Init Major Config
         mainPool.majorConfig=new MajorConfig(this.getDataFolder());

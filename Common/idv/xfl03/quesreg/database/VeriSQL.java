@@ -1,11 +1,13 @@
  package idv.xfl03.quesreg.database;
 
+import idv.xfl03.quesreg.bukkitapi.QuestionReg;
+
 import java.io.File;
 import java.sql.ResultSet;
 
 public class VeriSQL {
 	public SqliteTool st=null;
-	private static final int SQL_FILE_VERSION=1;
+	//private static final int SQL_FILE_VERSION=1;
 	public VeriSQL(File DatabaseFolder){
 		File DBFile=new File(DatabaseFolder.getAbsolutePath()+"\\veri.db");
 		boolean exist=DBFile.exists();
@@ -25,8 +27,9 @@ public class VeriSQL {
 						+ "age int,"
 						+ "regdate varchar(10),"
 						+ "logate varchar(10),"
-						+ "veri int,"
-						+ "admin int,"
+						+ "status int,"//User Status ( 0-NotPassedExam 1-PassedExam 2-Whitelist 3-Banned)
+						+ "veri int,"//If verified by admin ( 0-No 1-Yes )
+						+ "admin int,"//If is admin ( 0-No 1-Yes )
 						+ "regip varchar(15),"
 						+ "logip varchar(15)"
 						+ ");");
@@ -37,15 +40,15 @@ public class VeriSQL {
 						+ "date varchar(10)"
 						+ ");");
 				st.update("create table version("
-						+ "version int"
+						+ "version varchar(100)"
 						+ ");");
 				
 				st.update("insert into user values("
 						+ "'xfl03','593bbf1b91880577d26588095add4c72','3024da271ec6205fc3d364d87e8552bb',"
-						+ "'1552775831',16,'2015-04-26','2015-05-15',1,1,'127.0.0.1','127.0.0.1');");
+						+ "'1552775831',16,'2015-04-26','2015-05-15',1,1,1,'127.0.0.1','127.0.0.1');");
 				st.update("insert into score values("
 						+ "'xfl03',100,'5,1,2,4,3','2015-04-26');");
-				st.update("insert into version values("+SQL_FILE_VERSION+");");
+				st.update("insert into version values('"+QuestionReg.PLUGIN_VERSION+"');");
 				ResultSet rs = st.query("select * from user;");
 		        while(rs.next()){
 		        	System.out.print("username = " + rs.getString("username") + " "); 
