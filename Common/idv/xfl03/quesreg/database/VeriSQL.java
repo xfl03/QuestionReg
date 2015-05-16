@@ -26,7 +26,7 @@ public class VeriSQL {
 						+ "email varchar(100), "
 						+ "age int,"
 						+ "regdate varchar(10),"
-						+ "logate varchar(10),"
+						+ "logdate varchar(10),"
 						+ "status int,"//User Status ( 0-NotPassedExam 1-PassedExam 2-Whitelist 3-Banned)
 						+ "veri int,"//If verified by admin ( 0-No 1-Yes )
 						+ "admin int,"//If is admin ( 0-No 1-Yes )

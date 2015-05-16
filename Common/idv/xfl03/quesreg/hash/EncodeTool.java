@@ -6,7 +6,7 @@ import java.security.MessageDigest;
  * Use Java System Function To Encode.
  * Support MD5, SHA1, etc.
  *
- * @author Michael (http://www.micmiu.com/lang/java/java-md5-sha1/)[2012.6.4] , xfl03 [2015.2]
+ * @author Michael (http://www.micmiu.com/lang/java/java-md5-sha1/)[2012.6.4] , xfl03 [2015.2 2015.5]
  *
  */
 public class EncodeTool {
@@ -74,11 +74,22 @@ public class EncodeTool {
 	private static String getFormattedText(byte[] bytes) {
 		int len = bytes.length;
 		StringBuilder buf = new StringBuilder(len * 2);
-		for (int j = 0; j < len; j++) { 			buf.append(HEX_DIGITS[(bytes[j] >> 4) & 0x0f]);
+		for (int j = 0; j < len; j++) {
+			buf.append(HEX_DIGITS[(bytes[j] >> 4) & 0x0f]);
 			buf.append(HEX_DIGITS[bytes[j] & 0x0f]);
 		}
 		return buf.toString();
 	}
-
+	
+	/**
+	 * MD5(MD5(str)+SHA1(str))
+	 *
+	 * @param str
+	 * @return Encoded String
+	 * @throws Exception 
+	 */
+	public static String basicEncode(String str) throws Exception{
+		return encodeByMD5(encodeByMD5(str)+encodeBySHA1(str));
+	}
 	
 }
