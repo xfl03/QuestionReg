@@ -1,0 +1,6 @@
+#QuestionReg Config
+passing-score=80
+question-number=20
+need-admin-verify=false
+language=en
+http-server-port=1024
