@@ -23,6 +23,7 @@ public class VeriSQL {
 						+ "username varchar(20), "
 						+ "password varchar(32),"
 						+ "token varchar(32),"
+						+ "code varchar(32),"
 						+ "email varchar(100), "
 						+ "age int,"
 						+ "regdate varchar(10),"
@@ -44,7 +45,7 @@ public class VeriSQL {
 						+ ");");
 				
 				st.update("insert into user values("
-						+ "'xfl03','593bbf1b91880577d26588095add4c72','3024da271ec6205fc3d364d87e8552bb',"
+						+ "'xfl03','593bbf1b91880577d26588095add4c72','3024da271ec6205fc3d364d87e8552bb','3024da271ec6205fc3d364d87e8552bb',"
 						+ "'1552775831',16,'2015-04-26','2015-05-15',1,1,1,'127.0.0.1','127.0.0.1');");
 				st.update("insert into score values("
 						+ "'xfl03',100,'5,1,2,4,3','2015-04-26');");
@@ -70,15 +71,35 @@ public class VeriSQL {
 	public ResultSet getUserResultsByUsername(String username) throws Exception{
 		return st.query("select * from user where username = '"+username+"' ;");
 	}
-	public ResultSet getUserResultsByToken(String code) throws Exception{
-		return st.query("select * from user where token = '"+code+"' ;");
+	public ResultSet getUserResultsByToken(String token) throws Exception{
+		return st.query("select * from user where token = '"+token+"' ;");
 	}
-	public ResultSet getUserResultsByTokenFront(String codeFront) throws Exception{
-		return st.query("select * from user where token LIKE '"+codeFront+"%' ;");
+	public ResultSet getUserResultsByCode(String code) throws Exception{
+		return st.query("select * from user where code = '"+code+"' ;");
+	}
+	public ResultSet getUserResultsByCodeFront(String codeFront) throws Exception{
+		return st.query("select * from user where code LIKE '"+codeFront+"%' ;");
 	}
 	public ResultSet getUserResultsByEmail(String email) throws Exception{
 		return st.query("select * from user where email = '"+email+"' ;");
 	}
+	public ResultSet getUserResultsByAnyThing(String input) throws Exception{
+		ResultSet rs=getUserResultsByUsername(input);
+		if(rs.next()){
+			return rs;
+		}
+		rs=getUserResultsByCode(input);
+		if(rs.next()){
+			return rs;
+		}
+		rs=getUserResultsByEmail(input);
+		if(rs.next()){
+			return rs;
+		}
+		return null;
+	}
+	
+	
 	
 	public ResultSet getScoreResultsByUsername(String username) throws Exception{
 		return st.query("select * from score where username = '"+username+"' ;");

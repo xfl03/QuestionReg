@@ -10,6 +10,8 @@ public class TxtConfig {
 	public boolean needAdminVerify=false;
 	public String language="en";
 	public int httpServerPort=1024;
+	public int emailSupport=2;
+	public int giveAdminPermission=0;
 	
 	public ConfigTool config=null;
 	
@@ -20,6 +22,19 @@ public class TxtConfig {
 		needAdminVerify=config.getBooleanConfig("", needAdminVerify);
 		language=config.getStringConfig("language", language);
 		httpServerPort=config.getIntConfig("http-server-port", httpServerPort);
-		System.out.println(language);
+		emailSupport=config.getIntConfig("email-support", emailSupport);
+		giveAdminPermission=config.getIntConfig("give-admin-permission", giveAdminPermission);
+		//System.out.println(language);
+	}
+	public String getEmailSupportString(){
+		switch(emailSupport){
+		case 0:
+			return "email";
+		case 1:
+			return "qq";
+		default:
+		case 2:
+			return "email/qq";
+		}
 	}
 }

@@ -127,10 +127,11 @@ public class APIHandler {
 				return "EMAIL EXIST.";
     			
 			Calendar now = Calendar.getInstance();  
-			token=EncodeTool.encodeByMD5("TOKEN-"+System.currentTimeMillis()+Math.random());
+			String code=EncodeTool.encodeByMD5(username.get(0)+"CODE"+((int)(Math.random()*1000000000))+"CODE"+password.get(0));
+			token=EncodeTool.encodeByMD5("TOKEN-"+System.currentTimeMillis()+Math.random()*100);
 			mainPool.veriSQL.st.update("insert into user values"
 					+ "('"+username.get(0)+"','"+EncodeTool.encodeByMD5(password.get(0))+"',"
-					+ "'"+token+"','"+email.get(0)+"',"+age.get(0)+",'"
+					+ "'"+token+"','"+code+"','"+email.get(0)+"',"+age.get(0)+",'"
 					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"','"
 					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"',"
 					+ "0,0,0,'"+clientIP+"','"+clientIP+"');");
