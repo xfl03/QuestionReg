@@ -96,10 +96,10 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 apiRes.append(apih.handle());
                 token=apih.token;
             }else{
-            	file=new File(mainPool.majorConfig.webFolder,pa);
+            	file=new File(mainPool.mainData.webFolder,pa);
             }
             if(file!=null){
-            	if(!file.getAbsolutePath().startsWith(mainPool.majorConfig.webFolder.getPath())
+            	if(!file.getAbsolutePath().startsWith(mainPool.mainData.webFolder.getPath())
             			||file.isDirectory()){
             		hrs=HttpResponseStatus.FORBIDDEN;
             		file=null;

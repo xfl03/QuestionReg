@@ -1,25 +1,22 @@
-package idv.xfl03.quesreg.config;
+package idv.xfl03.quesreg.data;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
-public class MajorConfig {
+public class MainData {
 	
 	public File dataFolder=null;
 	public File questionFolder=null;
 	public File databaseFolder=null;
-	public File majorConfigFile=null;
+	public File mainConfigFile=null;
 	public File webFolder=null;
 	public File languageFolder=null;
-	public TxtConfig txtConfig=null;
+	private ResourceFileTool rft;
 	
-	public MajorConfig(File DataFolder){
+	public MainData(File DataFolder){
+		rft=new ResourceFileTool();
 		dataFolder=DataFolder;
-		majorConfigFile=getSubFile(dataFolder,"config.txt");
+		mainConfigFile=getSubFile(dataFolder,"config.txt");
     	questionFolder=getSubFile(dataFolder,"question");
     	databaseFolder=getSubFile(dataFolder,"database");
     	webFolder=getSubFile(dataFolder,"web");
@@ -32,7 +29,7 @@ public class MajorConfig {
         }
         
         //For someone who deleted some file/folder
-        if(!majorConfigFile.exists()){
+        if(!mainConfigFile.exists()){
         	System.out.println("Cannot Find Config File!");
         	this.initConfigFile();
         }
@@ -53,7 +50,6 @@ public class MajorConfig {
         	this.initLanguageFolder();
         }
         
-        txtConfig=new TxtConfig(majorConfigFile);
 	}
 	
 	private void initDataFolder(){
@@ -77,19 +73,19 @@ public class MajorConfig {
 	private void initConfigFile(){
 		// \plugins\QuestionReg\config.txt
     	try {
-			majorConfigFile.createNewFile();
+			mainConfigFile.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	if(majorConfigFile.exists()){
-    		System.out.println("Successfully Created "+majorConfigFile.getAbsolutePath());
+    	if(mainConfigFile.exists()){
+    		System.out.println("Successfully Created "+mainConfigFile.getAbsolutePath());
     	}else{
-    		System.out.println("Cannot Create "+majorConfigFile.getAbsolutePath());
+    		System.out.println("Cannot Create "+mainConfigFile.getAbsolutePath());
     		System.out.println("Cannot Load QuestionMsg, please check permission!");
     		return;
     	}
     	
-    	resourceFileCopy("config.txt",majorConfigFile);
+    	rft.resourceFileCopy("/resource/config.txt",mainConfigFile);
 	}
 	
 	private void initQuestionFolder(){
@@ -141,40 +137,8 @@ public class MajorConfig {
 	}
 	
 	private File getSubFile(File parentFile,String subName){
-		return new File(parentFile.getAbsolutePath()+"\\"+subName);
-	}
-	
-	private InputStream getResourceFileStream(String fileName){
-		return this.getClass().getClassLoader().getResourceAsStream(fileName);
-	}
-	
-	private void resourceFileCopy(String name, File to) {
-		InputStream is = null;
-		BufferedInputStream bis=null;
-		BufferedOutputStream bos=null;
-		try {
-			is=getResourceFileStream(name);
-			bis =new BufferedInputStream(is);
-			bos=new BufferedOutputStream(new FileOutputStream(to));
-			
-	        byte[] b=new byte[2048];
-	        int i=0;
-	        while((i=bis.read(b))!=-1){
-	        	bos.write(b, 0, i);
-	        }
-	        bos.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				is.close();
-				bis.close();
-				bos.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		}
+		//return new File(parentFile.getAbsolutePath()+"\\"+subName);
+		return new File(parentFile,subName);
 	}
 	
 }

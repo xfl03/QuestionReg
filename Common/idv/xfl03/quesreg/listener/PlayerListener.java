@@ -16,7 +16,7 @@ public class PlayerListener {
 			ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(es.username);
 			if(!rs.next()){
 				//User not exist
-				es.kickMessage="User not exists! Please go to http://<Server IP>:"+mainPool.majorConfig.txtConfig.httpServerPort+" to register.";
+				es.kickMessage="User not exists! Please go to http://<Server IP>:"+mainPool.mainConfig.httpServerPort+" to register.";
 				return es;
 			}
 			int status=rs.getInt("status");
@@ -30,12 +30,12 @@ public class PlayerListener {
 			}
 			if(status==0){
 				//Not passed exam
-				es.kickMessage="You haven't passed the exam! Please go to http://<Server IP>:"+mainPool.majorConfig.txtConfig.httpServerPort+" to join the exam.";
+				es.kickMessage="You haven't passed the exam! Please go to http://<Server IP>:"+mainPool.mainConfig.httpServerPort+" to join the exam.";
 				return es;
 			}
 			if(status==1){
 				//passed
-				if(mainPool.majorConfig.txtConfig.needAdminVerify){
+				if(mainPool.mainConfig.needAdminVerify){
 					es.kickMessage="You haven't been verified! Please ask admin to verify your account.";
 				}
 				return es;

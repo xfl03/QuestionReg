@@ -15,7 +15,7 @@ public class HttpServerThread implements Runnable {
 	private MainPool mainPool;
 	public HttpServerThread(MainPool mainPool){
 		this.mainPool=mainPool;
-		this.PORT=this.mainPool.majorConfig.txtConfig.httpServerPort;
+		this.PORT=this.mainPool.mainConfig.httpServerPort;
 	}
 	
 	@Override

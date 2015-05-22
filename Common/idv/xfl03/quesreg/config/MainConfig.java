@@ -2,11 +2,14 @@ package idv.xfl03.quesreg.config;
 
 import java.io.File;
 
-public class TxtConfig {
+public class MainConfig {
 	
 	//Default
 	public int passingScore=60;
-	public int questionNumber=5;
+	public int questionNumber1=5;
+	public int questionNumber2=5;
+	public int questionNumber3=0;
+	public int questionNumber4=0;
 	public boolean needAdminVerify=false;
 	public String language="en";
 	public int httpServerPort=1024;
@@ -15,10 +18,13 @@ public class TxtConfig {
 	
 	public ConfigTool config=null;
 	
-	public TxtConfig(File configFile){
+	public MainConfig(File configFile){
 		config=new ConfigTool(configFile);
 		passingScore=config.getIntConfig("passing-score", passingScore);
-		questionNumber=config.getIntConfig("question-number", questionNumber);
+		questionNumber1=config.getIntConfig("question-number-1", questionNumber1);
+		questionNumber2=config.getIntConfig("question-number-2", questionNumber2);
+		questionNumber3=config.getIntConfig("question-number-3", questionNumber3);
+		questionNumber4=config.getIntConfig("question-number-4", questionNumber4);
 		needAdminVerify=config.getBooleanConfig("", needAdminVerify);
 		language=config.getStringConfig("language", language);
 		httpServerPort=config.getIntConfig("http-server-port", httpServerPort);

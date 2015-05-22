@@ -8,7 +8,12 @@ passing-score=80
 
 #The number of questions in exam for user
 #>0
-question-number=20
+#question-number-%type%=
+#type:1-4
+question-number-1=5
+question-number-2=5
+question-number-3=0
+question-number-4=0
 
 #If user should be verified by administration before join game
 #In other word, if it is true, user cannot join game before verified by admin 

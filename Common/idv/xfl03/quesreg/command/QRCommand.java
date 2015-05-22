@@ -18,6 +18,7 @@ public class QRCommand {
 			try {
 				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(cs.sender);
 				if(!rs.next()||rs.getInt("admin")!=1){
+					cs.attendReturnText("No permission!");
 					cs.attendReturnText("You aren't QuestionReg admin. (Maybe you are OP.)");
 					return cs;
 				}
@@ -38,7 +39,7 @@ public class QRCommand {
 			cs.attendBlankLineToReturnText();
 			
 			cs.attendReturnText("Verify a user(User must have been created)");
-			cs.attendReturnText("/qr verify <username/code/"+mainPool.majorConfig.txtConfig.getEmailSupportString()+">");
+			cs.attendReturnText("/qr verify <username/code/"+mainPool.mainConfig.getEmailSupportString()+">");
 			cs.attendBlankLineToReturnText();
 
 			cs.attendReturnText("Set Admin (User must have been created)");
@@ -129,7 +130,7 @@ public class QRCommand {
 		if(cs.args[0].equalsIgnoreCase("verify")){
 			if(cs.args.length==1){
 				cs.attendReturnText("Verify a user(User must have been created)");
-				cs.attendReturnText("/qr verify <username/code/"+mainPool.majorConfig.txtConfig.getEmailSupportString()+">");
+				cs.attendReturnText("/qr verify <username/code/"+mainPool.mainConfig.getEmailSupportString()+">");
 				return cs;
 			}
 			String input=cs.args[1];
@@ -159,7 +160,7 @@ public class QRCommand {
 				cs.attendReturnText("/qr admin <username>");
 				return cs;
 			}
-			if(mainPool.majorConfig.txtConfig.giveAdminPermission==0){
+			if(mainPool.mainConfig.giveAdminPermission==0){
 				if(!cs.sender.equalsIgnoreCase(CommandSet.CONSOLE)){
 					cs.attendReturnText("No permission! Please use this command in console!");
 					return cs;
@@ -190,7 +191,7 @@ public class QRCommand {
 				cs.attendReturnText("/qr unadmin <username>");
 				return cs;
 			}
-			if(mainPool.majorConfig.txtConfig.giveAdminPermission==0){
+			if(mainPool.mainConfig.giveAdminPermission==0){
 				if(!cs.sender.equalsIgnoreCase(CommandSet.CONSOLE)){
 					cs.attendReturnText("No permission! Please use this command in console!");
 					return cs;
