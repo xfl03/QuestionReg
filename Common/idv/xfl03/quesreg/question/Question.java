@@ -14,8 +14,8 @@ public class Question {
 	public int type=1;
 	
 	//Create A Default
-	public Question(){
-		
+	public Question(int type){
+		this.type=type;
 	}
 	public Question(File questionFile){
 		ConfigTool ct=new ConfigTool(questionFile);

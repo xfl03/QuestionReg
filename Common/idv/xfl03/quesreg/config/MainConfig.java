@@ -10,6 +10,7 @@ public class MainConfig {
 	public int questionNumber2=5;
 	public int questionNumber3=0;
 	public int questionNumber4=0;
+	public int[] questionNumber;
 	public boolean needAdminVerify=false;
 	public String language="en";
 	public int httpServerPort=1024;
@@ -30,7 +31,12 @@ public class MainConfig {
 		httpServerPort=config.getIntConfig("http-server-port", httpServerPort);
 		emailSupport=config.getIntConfig("email-support", emailSupport);
 		giveAdminPermission=config.getIntConfig("give-admin-permission", giveAdminPermission);
-		//System.out.println(language);
+
+		questionNumber=new int[5];
+		questionNumber[1]=questionNumber1;
+		questionNumber[2]=questionNumber2;
+		questionNumber[3]=questionNumber3;
+		questionNumber[4]=questionNumber4;
 	}
 	public String getEmailSupportString(){
 		switch(emailSupport){

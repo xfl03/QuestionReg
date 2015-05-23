@@ -48,7 +48,12 @@ public class QuestionReg extends JavaPlugin {
         mainPool.veriSQL=new VeriSQL(mainPool.mainData.databaseFolder);
         
         //Init Question List
-        mainPool.questionList=new QuestionList(mainPool.mainData.questionFolder);
+        mainPool.questionList=new QuestionList(mainPool.mainData.questionFolder,mainPool.mainConfig);
+        String ids=mainPool.questionList.getRandomQuestions();
+        System.out.println("Random Questions: "+ids);
+        int[] id=mainPool.questionList.getIds(ids);
+        System.out.println("Question 1: "+id[0]);;
+        System.out.println("ID 10001: "+mainPool.questionList.getQuestion(10001).question);
         
         //Http Server
         hst=new HttpServerThread(mainPool);
@@ -69,7 +74,8 @@ public class QuestionReg extends JavaPlugin {
 	@SuppressWarnings("deprecation")
 	@Override
     public void onDisable(){
-		hstt.stop();
+		if(hstt!=null)
+			hstt.stop();
 		System.out.println("["+PLUGIN_NAME+"] QuestionMsg Disabled");
 	}
 	

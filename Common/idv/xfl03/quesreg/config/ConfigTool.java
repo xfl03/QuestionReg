@@ -2,18 +2,21 @@ package idv.xfl03.quesreg.config;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class ConfigTool {
 	private HashMap<String,String> config=new HashMap<String,String>();
 	public ConfigTool(File configFile){
-		FileReader fr=null;
+		InputStreamReader isr=null;
+		FileInputStream fis=null;
 		BufferedReader br=null;
 		try {
-			fr = new FileReader(configFile);
-			br=new BufferedReader(fr);
+			fis=new FileInputStream(configFile);
+			isr=new InputStreamReader(fis,"UTF-8");
+			br=new BufferedReader(isr);
 			String s;
 			while((s=br.readLine())!=null){
 				if(!s.startsWith("#")&&!s.equalsIgnoreCase("")){
@@ -29,7 +32,8 @@ public class ConfigTool {
 			e.printStackTrace();
 		}finally{
 			try {
-				fr.close();
+				isr.close();
+				fis.close();
 				br.close();
 			} catch (IOException e) {
 				e.printStackTrace();
