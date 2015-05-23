@@ -1,8 +1,11 @@
 package idv.xfl03.quesreg.question;
 
 import idv.xfl03.quesreg.config.MainConfig;
+import idv.xfl03.quesreg.data.MainData;
+import idv.xfl03.quesreg.data.ResourceFileTool;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class QuestionList {
@@ -14,8 +17,10 @@ public class QuestionList {
 	private final static int SPLIT_BASIC=10000;
 	
 	private MainConfig mc;
-	public QuestionList(File questionFolder,MainConfig mc){
+	private MainData md;
+	public QuestionList(File questionFolder,MainConfig mc,MainData md){
 		this.mc=mc;
+		this.md=md;
 		alq=new ArrayList<ArrayList<Question>>();
 		alq.add(null);
 		for(int i=1;i<=4;i++){
@@ -26,6 +31,29 @@ public class QuestionList {
 		if(subFolder.length==0){
 			//First time
 			System.out.println("Init Questions!");
+			ResourceFileTool rft=this.md.rft;
+			for(int i=1;i<=10;i++){
+				//en
+				File t=md.getSubFile(questionFolder, "/official-default-en/"+i+".txt");
+				t.getParentFile().mkdirs();
+				try {
+					t.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				rft.resourceFileCopy("/resource/question/official-default-en/"+i+".txt",t);
+				
+				//zh-cn
+				t=md.getSubFile(questionFolder, "/official-default-zh-cn/"+i+".txt");
+				t.getParentFile().mkdirs();
+				try {
+					t.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				rft.resourceFileCopy("/resource/question/official-default-zh-cn/"+i+".txt", t);
+			}
+			subFolder=questionFolder.listFiles(qff1);
 		}
 		
 		for(File f : subFolder){
@@ -62,6 +90,7 @@ public class QuestionList {
 				continue;
 			}
 			int[] id=new int[mc.questionNumber[i]];
+			//System.out.println(mc.questionNumber.length);
 			for(int j=0;j<mc.questionNumber[i];j++){
 				int max=alq.get(i).size();
 				int temp=i*SPLIT_BASIC+getRandom(1,max);

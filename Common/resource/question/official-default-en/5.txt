@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Which project about Minecraft was not based on Forge?
+a=MCPC
+b=Sponge
+c=Spigot
+d=What is 'Forge'??? DK!!!
+key=c
+type=1

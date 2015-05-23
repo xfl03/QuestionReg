@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Which java lib about network transportation is used by Minecraft PC 1.7+? 
+a=jboss
+b=netty
+c=commons io
+d=WTF!
+key=b
+type=1

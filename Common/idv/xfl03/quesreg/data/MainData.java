@@ -11,7 +11,7 @@ public class MainData {
 	public File mainConfigFile=null;
 	public File webFolder=null;
 	public File languageFolder=null;
-	private ResourceFileTool rft;
+	public ResourceFileTool rft;
 	
 	public MainData(File DataFolder){
 		rft=new ResourceFileTool();
@@ -136,7 +136,7 @@ public class MainData {
     	}
 	}
 	
-	private File getSubFile(File parentFile,String subName){
+	public File getSubFile(File parentFile,String subName){
 		//return new File(parentFile.getAbsolutePath()+"\\"+subName);
 		return new File(parentFile,subName);
 	}

@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Minecraft PE 使用了哪种程序语言?
+a=Java
+b=C++
+c=C#
+d=什么是'程序语言'??? 不知道!!!
+key=a
+type=1

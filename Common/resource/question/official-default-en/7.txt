@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=What does Jeb's hair look like?
+a=Long
+b=Short
+c=Black
+d=Who is 'Jeb'???
+key=a
+type=1
