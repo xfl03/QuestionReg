@@ -17,7 +17,7 @@ public class QRCommandHandler {
 		if(req.sender!=CommandRequestSet.CONSOLE){
 			//Verify permission
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(req.sender);
+				ResultSet rs=mainPool.mainDB.getUserResultsByUsername(req.sender);
 				if(!rs.next()||rs.getInt("admin")!=1){
 					res.attendReturnText("No permission!");
 					res.attendReturnText("You aren't QuestionReg admin. (Maybe you are OP.)");
@@ -64,7 +64,7 @@ public class QRCommandHandler {
 			}
 			String username=req.args[1];
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(username);
+				ResultSet rs=mainPool.mainDB.getUserResultsByUsername(username);
 				if(rs.next()){
 					res.attendReturnText("User Exsits!");
 					return res;
@@ -98,7 +98,7 @@ public class QRCommandHandler {
 			
 			if(!email.equalsIgnoreCase("")){
 				try {
-					ResultSet rs1=mainPool.veriSQL.getUserResultsByEmail(email);
+					ResultSet rs1=mainPool.mainDB.getUserResultsByEmail(email);
 					if(rs1.next()){
 						res.attendReturnText("Email Exsits!");
 						return res;
@@ -113,7 +113,7 @@ public class QRCommandHandler {
 			try {
 				Calendar now = Calendar.getInstance();
 				String code=EncodeTool.encodeByMD5(username+"CODE"+((int)(Math.random()*1000000000))+"CODE"+password);
-				mainPool.veriSQL.st.update("insert into user values"
+				mainPool.mainDB.st.update("insert into user values"
 						+ "('"+username+"','"+EncodeTool.basicEncode(password)+"',"
 						+ "'','"+code+"','"+email+"',"+age+",'"
 						+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"','',"
@@ -136,7 +136,7 @@ public class QRCommandHandler {
 			}
 			String input=req.args[1];
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByAnyThing(input);
+				ResultSet rs=mainPool.mainDB.getUserResultsByAnyThing(input);
 				if(rs==null){
 					res.attendReturnText("User Not Found!");
 					return res;
@@ -147,7 +147,7 @@ public class QRCommandHandler {
 					res.attendReturnText(username+" has already been verified!");
 					return res;
 				}
-				mainPool.veriSQL.st.update("UPDATE user SET veri=1 WHERE username='"+username+"';");
+				mainPool.mainDB.st.update("UPDATE user SET veri=1 WHERE username='"+username+"';");
 				res.attendReturnText("Success! " +username+" has been verified!");
 				return res;
 			} catch (Exception e) {
@@ -169,7 +169,7 @@ public class QRCommandHandler {
 			}
 			String username=req.args[1];
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(username);
+				ResultSet rs=mainPool.mainDB.getUserResultsByUsername(username);
 				if(!rs.next()){
 					res.attendReturnText("User Not Found!");
 					return res;
@@ -178,7 +178,7 @@ public class QRCommandHandler {
 					res.attendReturnText(username+" has already been admin!");
 					return res;
 				}
-				mainPool.veriSQL.st.update("UPDATE user SET admin=1 WHERE username='"+username+"';");
+				mainPool.mainDB.st.update("UPDATE user SET admin=1 WHERE username='"+username+"';");
 				res.attendReturnText("Success! " +username+" is admin now!");
 				return res;
 			} catch (Exception e) {
@@ -200,7 +200,7 @@ public class QRCommandHandler {
 			}
 			String username=req.args[1];
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(username);
+				ResultSet rs=mainPool.mainDB.getUserResultsByUsername(username);
 				if(!rs.next()){
 					res.attendReturnText("User Not Found!");
 					return res;
@@ -209,7 +209,7 @@ public class QRCommandHandler {
 					res.attendReturnText(username+" has never been admin!");
 					return res;
 				}
-				mainPool.veriSQL.st.update("UPDATE user SET admin=0 WHERE username='"+username+"';");
+				mainPool.mainDB.st.update("UPDATE user SET admin=0 WHERE username='"+username+"';");
 				res.attendReturnText("Success! " +username+" is no longer admin!");
 				return res;
 			} catch (Exception e) {
@@ -225,12 +225,12 @@ public class QRCommandHandler {
 			}
 			String username=req.args[1];
 			try {
-				ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(username);
+				ResultSet rs=mainPool.mainDB.getUserResultsByUsername(username);
 				if(!rs.next()){
 					Calendar now = Calendar.getInstance();
 					String password=((int)(Math.random()*900000+100000))+"";//Random six number for password
 					String code=EncodeTool.encodeByMD5(username+"CODE"+((int)(Math.random()*1000000000))+"CODE"+password);
-					mainPool.veriSQL.st.update("insert into user values"
+					mainPool.mainDB.st.update("insert into user values"
 							+ "('"+username+"','"+EncodeTool.basicEncode(password)+"',"
 							+ "'','"+code+"','',0,'"
 							+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"','',"
@@ -243,7 +243,7 @@ public class QRCommandHandler {
 						res.attendReturnText(username+" have already been in whitelist!");
 						return res;
 					}
-					mainPool.veriSQL.st.update("UPDATE user SET status=2 WHERE username='"+username+"';");
+					mainPool.mainDB.st.update("UPDATE user SET status=2 WHERE username='"+username+"';");
 					res.attendReturnText("Success! " +username+" is in whitelist now!");
 					return res;
 				}

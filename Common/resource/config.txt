@@ -30,9 +30,12 @@ language=en
 http-server-port=1024
 
 #Email pattern which can be support
-#0-Email Only 1-QQ Only 2-Both Email&QQ
-email-support=2
+#1-Email Only 2-QQ Only 3-Both Email&QQ
+email-support=3
 
 #Who can give user QuestionReg admin
-#0-Console Only 1-Both Console&Admin
+#0-Console Only 1-Both Console&Admin(Not OP)
 give-admin-permission=0
+
+#If use code, you can verify identify of user when joining group.
+use-code=true

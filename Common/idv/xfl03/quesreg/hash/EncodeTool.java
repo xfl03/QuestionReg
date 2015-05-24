@@ -82,14 +82,14 @@ public class EncodeTool {
 	}
 	
 	/**
-	 * MD5(MD5(str)+SHA1(str))
+	 * MD5(SHA1(str)+MD5(str))
 	 *
 	 * @param str
 	 * @return Encoded String
 	 * @throws Exception 
 	 */
 	public static String basicEncode(String str) throws Exception{
-		return encodeByMD5(encodeByMD5(str)+encodeBySHA1(str));
+		return encodeByMD5(encodeBySHA1(str)+encodeByMD5(str));
 	}
 	
 }

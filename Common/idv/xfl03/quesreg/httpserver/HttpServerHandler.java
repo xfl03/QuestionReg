@@ -97,9 +97,10 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                 token=apih.token;
             }else{
             	file=new File(mainPool.mainData.webFolder,pa);
+            	System.out.println(file.getAbsolutePath());
             }
             if(file!=null){
-            	if(!file.getAbsolutePath().startsWith(mainPool.mainData.webFolder.getPath())
+            	if(!file.getAbsolutePath().startsWith(mainPool.mainData.webFolder.getAbsolutePath())
             			||file.isDirectory()){
             		hrs=HttpResponseStatus.FORBIDDEN;
             		file=null;
@@ -149,7 +150,6 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 						//End
 						fis.close();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -180,7 +180,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
             //System.out.println("Version:"+ req.getProtocolVersion());
 			
 			System.out.println("Client IP:"+ clientIP);
-
+			System.out.println(" ");
 			  
 			
 			String mime="text/html";

@@ -5,7 +5,7 @@ import java.io.File;
 import idv.xfl03.quesreg.MainPool;
 import idv.xfl03.quesreg.config.MainConfig;
 import idv.xfl03.quesreg.data.MainData;
-import idv.xfl03.quesreg.database.VeriSQL;
+import idv.xfl03.quesreg.database.MainDB;
 import idv.xfl03.quesreg.hash.EncodeTool;
 import idv.xfl03.quesreg.httpserver.HttpServerThread;
 import idv.xfl03.quesreg.question.QuestionList;
@@ -29,7 +29,7 @@ public class QuestionReg{
         mainPool.mainConfig=new MainConfig(mainPool.mainData.mainConfigFile);
         
         //Init Verify DB
-        mainPool.veriSQL=new VeriSQL(mainPool.mainData.databaseFolder);
+        mainPool.mainDB=new MainDB(mainPool.mainData.databaseFolder);
         
         //Init Question List
         mainPool.questionList=new QuestionList(mainPool.mainData.questionFolder,mainPool.mainConfig,mainPool.mainData);

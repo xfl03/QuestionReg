@@ -14,7 +14,7 @@ public class PlayerEventHanlder {
 		EventRespondSet res=new EventRespondSet();
 		try {
 			System.out.println((mainPool==null));
-			ResultSet rs=mainPool.veriSQL.getUserResultsByUsername(req.username);
+			ResultSet rs=mainPool.mainDB.getUserResultsByUsername(req.username);
 			if(!rs.next()){
 				//User not exist
 				res.kickMessage="User not exists! Please go to http://<Server IP>:"+mainPool.mainConfig.httpServerPort+" to register.";

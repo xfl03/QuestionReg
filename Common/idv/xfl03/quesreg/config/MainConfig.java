@@ -14,8 +14,9 @@ public class MainConfig {
 	public boolean needAdminVerify=false;
 	public String language="en";
 	public int httpServerPort=1024;
-	public int emailSupport=2;
+	public int emailSupport=3;
 	public int giveAdminPermission=0;
+	public boolean useCode=true;
 	
 	public ConfigTool config=null;
 	
@@ -31,6 +32,7 @@ public class MainConfig {
 		httpServerPort=config.getIntConfig("http-server-port", httpServerPort);
 		emailSupport=config.getIntConfig("email-support", emailSupport);
 		giveAdminPermission=config.getIntConfig("give-admin-permission", giveAdminPermission);
+		useCode=config.getBooleanConfig("use-code", useCode);
 
 		questionNumber=new int[5];
 		questionNumber[1]=questionNumber1;
@@ -40,12 +42,12 @@ public class MainConfig {
 	}
 	public String getEmailSupportString(){
 		switch(emailSupport){
-		case 0:
-			return "email";
 		case 1:
+			return "email";
+		case 2:
 			return "qq";
 		default:
-		case 2:
+		case 3:
 			return "email/qq";
 		}
 	}

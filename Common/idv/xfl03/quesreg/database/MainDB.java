@@ -5,10 +5,10 @@ import idv.xfl03.quesreg.QuestionReg;
 import java.io.File;
 import java.sql.ResultSet;
 
-public class VeriSQL {
+public class MainDB {
 	public SqliteTool st=null;
 	//private static final int SQL_FILE_VERSION=1;
-	public VeriSQL(File DatabaseFolder){
+	public MainDB(File DatabaseFolder){
 		File DBFile=new File(DatabaseFolder.getAbsolutePath()+"\\veri.db");
 		boolean exist=DBFile.exists();
 		st=new SqliteTool(DBFile.getAbsolutePath());

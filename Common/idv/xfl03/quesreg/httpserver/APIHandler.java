@@ -26,16 +26,28 @@ public class APIHandler {
 		if(target.startsWith("login")){
         	return login();
         }
-        
+		if(target.startsWith("userexist")){
+        	return userexist();
+        }
+		if(target.startsWith("emailsupport")){
+        	return emailsupport();
+        }
+		if(target.startsWith("codesupport")){
+        	return codesupport();
+        }
+		if(target.startsWith("changepw")){
+        	return changepw();
+        }
         if(target.startsWith("reg")){
         	return reg();
         }
 		return "API Not Found.";
 	}
+	
 	public String login(){
 		if(!token.equalsIgnoreCase("")){
     		try {
-				ResultSet rs0= mainPool.veriSQL.getUserResultsByToken(token);
+				ResultSet rs0= mainPool.mainDB.getUserResultsByToken(token);
 				if(!rs0.next()){
 					token="";
 					return "Bad Token. [Not Find]";
@@ -56,7 +68,7 @@ public class APIHandler {
 			return "Not enough args.";
 		}
 		try {
-			ResultSet rs= mainPool.veriSQL.getUserResultsByUsername(username.get(0));
+			ResultSet rs= mainPool.mainDB.getUserResultsByUsername(username.get(0));
 			ResultSetMetaData   rsmd1 = rs.getMetaData();
 			int count = rsmd1.getColumnCount();
 			if(count==0){
@@ -68,7 +80,7 @@ public class APIHandler {
 				String querySQL="update user SET token='"+token+"',logip='"+clientIP+"',logdate= '"
 					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"'"
 						+ "WHERE username='"+username.get(0)+"'";
-				mainPool.veriSQL.st.update(querySQL);
+				mainPool.mainDB.st.update(querySQL);
 				return "Success.";
 			}
 			return "Wrong Password.";
@@ -76,10 +88,57 @@ public class APIHandler {
 				return "SQL ERROR.";
 		}
 	}
+	public String userexist(){
+		List<String> username=uriAttributes.get("username");
+		if(username==null||username.size()<1){
+			return "Not enough args.";
+		}
+		try {
+			ResultSet rs=mainPool.mainDB.getUserResultsByUsername(username.get(0));
+			return booleanToInt(rs.next())+"";
+		} catch (Exception e) {
+			return "SQL ERROR."+e.getMessage();
+		}
+	}
+	public String emailsupport() {
+		return mainPool.mainConfig.emailSupport+"";
+	}
+	public String codesupport() {
+		return booleanToInt(mainPool.mainConfig.useCode)+"";
+	}
+	public String changepw(){
+		if(token.equalsIgnoreCase("")){
+			return "No Token.";
+		}
+		try {
+			ResultSet rs=mainPool.mainDB.getUserResultsByToken(token);
+			if(!rs.next()){
+				token="";
+				return "Bad Token. [Not Find]";
+			}
+			List<String> oldPW=uriAttributes.get("old");
+			List<String> newPW=uriAttributes.get("new");
+			if(oldPW==null||oldPW.isEmpty()||newPW==null||newPW.isEmpty()){
+				return "Not enough args.";
+			}
+			if(!oldPW.get(0).equalsIgnoreCase(rs.getString("password"))){
+				return "Wrong Password!";
+			}
+			if(!oldPW.get(0).matches("^\\w{32}$")||!newPW.get(0).matches("^\\w{32}$")){
+				return "Password wrong pattern.";
+			}
+			mainPool.mainDB.st.update(
+					"UPDATE user SET password='"+EncodeTool.encodeByMD5(newPW.get(0))+"' "
+							+ "WHERE token='"+token+"'");
+		} catch (Exception e) {
+			return "SQL ERROR."+e.getMessage();
+		}
+		return "";
+	}
 	public String reg(){
 		if(!token.equalsIgnoreCase("")){
     		try {
-				ResultSet rs0= mainPool.veriSQL.getUserResultsByToken(token);
+				ResultSet rs0= mainPool.mainDB.getUserResultsByToken(token);
 				if(!rs0.next()){
 					token="";
 					return "Bad Token. [Not Find]";
@@ -118,18 +177,18 @@ public class APIHandler {
     			
 			ResultSet rs;
     			
-			rs= mainPool.veriSQL.getUserResultsByUsername(username.get(0));
+			rs= mainPool.mainDB.getUserResultsByUsername(username.get(0));
 			if(rs.next())
 				return "USER EXIST.";
 				
-			rs= mainPool.veriSQL.getUserResultsByEmail(email.get(0));
+			rs= mainPool.mainDB.getUserResultsByEmail(email.get(0));
 			if(rs.next())
 				return "EMAIL EXIST.";
     			
 			Calendar now = Calendar.getInstance();  
 			String code=EncodeTool.encodeByMD5(username.get(0)+"CODE"+((int)(Math.random()*1000000000))+"CODE"+password.get(0));
 			token=EncodeTool.encodeByMD5("TOKEN-"+System.currentTimeMillis()+Math.random()*100);
-			mainPool.veriSQL.st.update("insert into user values"
+			mainPool.mainDB.st.update("insert into user values"
 					+ "('"+username.get(0)+"','"+EncodeTool.encodeByMD5(password.get(0))+"',"
 					+ "'"+token+"','"+code+"','"+email.get(0)+"',"+age.get(0)+",'"
 					+ now.get(Calendar.YEAR)+"-"+(now.get(Calendar.MONTH)+1)+"-"+now.get(Calendar.DAY_OF_MONTH)+"','"
@@ -143,5 +202,9 @@ public class APIHandler {
 	public String userinfo(){
 		//TODO finish it!!
 		return "Not finish.";
+	}
+	
+	private int booleanToInt(boolean b){
+		return b?1:0;
 	}
 }
