@@ -1,10 +1,8 @@
 package idv.xfl03.quesreg.command;
 
-public class CommandSet {
+public class CommandRespondSet {
 	
-	public String sender="";
 	public boolean returnCode=false;
-	public String[] args=null;
 	public String returnText=null;
 	
 	public final static String CRLF="\r\n";
@@ -15,7 +13,7 @@ public class CommandSet {
 	public static final String[] EMPTY_RETURN_TEXT={"[ERROR] Empty return text."};
 	 
 	public void attendReturnText(String text){
-		String CRLF=CommandSet.CRLF;
+		String CRLF=CommandRespondSet.CRLF;
 		if(returnText==null){
 			CRLF="";
 			returnText="";
@@ -32,7 +30,7 @@ public class CommandSet {
 	
 	public String[] getReturnText(){
 		if(returnText!=null){
-			return returnText.split(CommandSet.CRLF);
+			return returnText.split(CommandRespondSet.CRLF);
 		}else{
 			return EMPTY_RETURN_TEXT;
 		}

@@ -84,24 +84,26 @@ public class QuestionList {
 		//System.out.println("getRandomQuestions");
 		StringBuilder sb=new StringBuilder();
 		for(int i=1;i<=4;i++){
-			//System.out.println(i);
-			if(mc.questionNumber[i]==0){
+			System.out.println(i);
+			int questionNumber=mc.questionNumber[i];
+			if(questionNumber==0){
 				//System.out.println(i+" Needs Nothing");
 				continue;
 			}
-			int[] id=new int[mc.questionNumber[i]];
-			//System.out.println(mc.questionNumber.length);
-			for(int j=0;j<mc.questionNumber[i];j++){
-				int max=alq.get(i).size();
-				int temp=i*SPLIT_BASIC+getRandom(1,max);
+			int[] id=new int[questionNumber];
+			System.out.println(mc.questionNumber.length+" "+id.length+" "+i);
+			
+			for(int j=0;j<questionNumber;j++){
+				//int max=alq.get(i).size();
+				int temp=i*SPLIT_BASIC+getRandom(1,questionNumber);
 				int loopCount=0;
-				while(isUsed(id,temp)&&loopCount<=mc.questionNumber[i]){
+				while(isUsed(id,temp)&&loopCount<=questionNumber){
 					loopCount++;
 					temp=i*10000+getRandom(1,alq.get(i).size()-1);
 				}
 				if(isUsed(id,temp)){
 					//Too much Loop Times
-					for(int k=i*SPLIT_BASIC+1;i<=i*SPLIT_BASIC+max;i++){
+					for(int k=i*SPLIT_BASIC+1;i<=i*SPLIT_BASIC+questionNumber;i++){
 						if(!isUsed(id,k)){
 							temp=k;
 							break;

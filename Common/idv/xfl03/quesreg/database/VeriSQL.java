@@ -1,6 +1,6 @@
  package idv.xfl03.quesreg.database;
 
-import idv.xfl03.quesreg.bukkitapi.QuestionReg;
+import idv.xfl03.quesreg.QuestionReg;
 
 import java.io.File;
 import java.sql.ResultSet;
