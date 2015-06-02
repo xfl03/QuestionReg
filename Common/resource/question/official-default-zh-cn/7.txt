@@ -1,8 +1,8 @@
 ﻿#Please use UTF-8 /no BOM
-question=Jeb的头发是什么样子?
-a=长发
-b=短发
-c=黑发
-d=谁是'Jeb'!!!
-key=a
+question=原版中，基岩能否被破坏？
+a=能
+b=不能
+c=也许能
+d=基岩是啥玩意?
+ans=b
 type=1
