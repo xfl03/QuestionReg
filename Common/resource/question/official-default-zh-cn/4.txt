@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=以下哪个和Minecraft有关的项目不基于 'BukkitAPI'?
-a=CB
-b=Sponge
-c=Spigot
-d=究竟什么是'BukkitAPI'??? 眼前一片迷茫...
-key=b
-type=1
