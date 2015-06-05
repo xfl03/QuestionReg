@@ -1,0 +1,7 @@
+question=一个一次性电池能发多少电?
+a=1000eu
+b=512eu
+c=1200eu
+d=2048eu
+key=c
+type=1
