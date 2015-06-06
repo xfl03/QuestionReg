@@ -1,8 +1,8 @@
 ﻿#Please use UTF-8 /no BOM
-question=原版中，基岩能否被破坏？
-a=能
-b=不能
-c=也许能
-d=基岩是啥玩意?
-ans=b
+question=Minecraft官方文件存储于何处?
+a=MediaFire
+b=DropBox
+c=Google
+d=Amazon
+key=d
 type=1

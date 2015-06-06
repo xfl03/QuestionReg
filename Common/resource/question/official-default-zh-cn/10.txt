@@ -1,7 +1,8 @@
-question=以下哪个生物可以携带箱子
-a=马
-b=驴
-c=烈焰人
-d=史莱姆
+﻿#Please use UTF-8 /no BOM
+question=Minecraft 1.7+ 使用了以下哪个网络传输支持库? 
+a=jboss
+b=netty
+c=commons io
+d=WTF!
 key=b
 type=1

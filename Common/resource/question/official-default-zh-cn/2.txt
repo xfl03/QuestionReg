@@ -1,7 +1,8 @@
-question=Railcraft的焦炉的副产物为？
-a=焦油
-b=润滑油
-c=木馏油
-d=燃油
-key=c
+﻿#Please use UTF-8 /no BOM
+question=Minecraft PE 使用了哪种程序语言?
+a=Java
+b=C++
+c=C#
+d=什么是'程序语言'??? 不知道!!!
+key=a
 type=1

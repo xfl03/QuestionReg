@@ -1,7 +1,8 @@
-question=一个煤炭能烧8个物品,也就是跟木炭的烧制数量一样吗？
-a=一样
-b=不一样
-c=根据地图种子决定数量
-d=根据生物群系决定数量
-key=a
+﻿#Please use UTF-8 /no BOM
+question=Minecraft于以下哪个版本进行了红石大更新?
+a=1.4
+b=1.5
+c=1.6
+d=1.7
+key=b
 type=1

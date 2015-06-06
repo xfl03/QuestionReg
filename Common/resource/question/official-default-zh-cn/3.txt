@@ -1,7 +1,8 @@
-question=神秘时代因为扭曲所产生的DeBUFF能否饮用牛奶来消除？
-a=能
-b=不能
-c=部分可以
-d=神秘时代有debuff吗?
-key=b
+﻿#Please use UTF-8 /no BOM
+question=以下哪个和Minecraft有关的项目收到过 'DMCA删除通知'?
+a=Sponge
+b=Forge
+c=Spigot
+d=什么是 'DMCA'??? 真心不知道诶!!!
+key=c
 type=1
