@@ -2,6 +2,7 @@ package idv.xfl03.quesreg.httpserver;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -200,8 +201,38 @@ public class APIHandler {
 		}
 	}
 	public String userinfo(){
-		//TODO finish it!!
-		return "Not finish.";
+		if(token == null){
+			return "User doesn't exist!";
+		}
+		ResultSet rs;
+		try {
+			rs = mainPool.mainDB.getUserResultsByToken(token);
+			StringBuilder sb = new StringBuilder();
+			sb.append(rs.getString("username"));
+			sb.append(",");
+			sb.append(rs.getString("email"));
+			sb.append(",");
+			sb.append(rs.getInt("age"));
+			sb.append(",");
+			sb.append(rs.getString("regdate"));
+			sb.append(",");
+			sb.append(rs.getInt("veri"));
+			sb.append(",");
+			sb.append(rs.getInt("admin"));
+			sb.append(",");
+			sb.append(rs.getString("logdate"));
+			sb.append(",");
+			sb.append(rs.getString("logip"));
+			sb.append(",");
+			sb.append(rs.getString("code"));
+			return sb.toString();
+		} catch (Exception e) {
+			//lol
+		}
+		return "Unknown error. Contact server administrator";
+		//return "Not finish.";
+		
+
 	}
 	
 	private int booleanToInt(boolean b){
