@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Which runtime can be installed to launcher Minecraft PC?
+a=VC++ 2012
+b=JRE 1.7
+c=.NET 4.0
+d=What is 'runtime'??? DK!!!
+key=b
+type=1

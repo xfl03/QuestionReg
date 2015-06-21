@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Which project about Minecraft was not based on BukkitAPI?
+a=CB
+b=Sponge
+c=Spigot
+d=What is 'BukkitAPI'??? DK!!!
+key=b
+type=1

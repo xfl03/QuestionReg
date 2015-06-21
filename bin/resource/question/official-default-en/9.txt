@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=When did Redstone Big Update happen to Minecraft PC?
+a=1.4
+b=1.5
+c=1.6
+d=1.7
+key=b
+type=1

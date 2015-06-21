@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=以下哪个和Minecraft有关的项目收到过 'DMCA删除通知'?
+a=Sponge
+b=Forge
+c=Spigot
+d=什么是 'DMCA'??? 真心不知道诶!!!
+key=c
+type=1

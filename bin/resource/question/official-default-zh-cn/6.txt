@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Minecraft官方文件存储于何处?
+a=MediaFire
+b=DropBox
+c=Google
+d=Amazon
+key=d
+type=1
