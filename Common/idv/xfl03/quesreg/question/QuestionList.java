@@ -52,8 +52,10 @@ public class QuestionList {
 					e.printStackTrace();
 				}
 				rft.resourceFileCopy("/resource/question/official-default-zh-cn/"+i+".txt", t);
+			}
+			for(int i=1;i<=5;i++){
 				//anti xiong hai zi
-				t=md.getSubFile(questionFolder, "/anti-little-child-zh-cn/"+i+".txt");
+				File t=md.getSubFile(questionFolder, "/anti-little-child-zh-cn/"+i+".txt");
 				t.getParentFile().mkdirs();
 				try {
 					t.createNewFile();
@@ -62,6 +64,7 @@ public class QuestionList {
 				}
 				rft.resourceFileCopy("/resource/question/anti-little-child-zh-cn/"+i+".txt", t);
 			}
+			
 			subFolder=questionFolder.listFiles(qff1);
 		}
 		
