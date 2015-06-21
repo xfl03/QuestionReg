@@ -1,0 +1,8 @@
+#Please use UTF-8 /no BOM
+question=在三角形ABC中,AB=AC,BC=8,tanC=1.5,如果将ABC沿直线l翻折后,点B落在边AC的中点处,直线l与边BC交于点D,那么BD的长为?
+a=8
+b=5
+c=9
+d=7
+key=d
+type=1
