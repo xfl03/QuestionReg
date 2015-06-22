@@ -207,25 +207,7 @@ public class APIHandler {
 		ResultSet rs;
 		try {
 			rs = mainPool.mainDB.getUserResultsByToken(token);
-			StringBuilder sb = new StringBuilder();
-			sb.append(rs.getString("username"));
-			sb.append(",");
-			sb.append(rs.getString("email"));
-			sb.append(",");
-			sb.append(rs.getInt("age"));
-			sb.append(",");
-			sb.append(rs.getString("regdate"));
-			sb.append(",");
-			sb.append(rs.getInt("veri"));
-			sb.append(",");
-			sb.append(rs.getInt("admin"));
-			sb.append(",");
-			sb.append(rs.getString("logdate"));
-			sb.append(",");
-			sb.append(rs.getString("logip"));
-			sb.append(",");
-			sb.append(rs.getString("code"));
-			return sb.toString();
+			return getUserInfo(rs);
 		} catch (Exception e) {
 			//lol
 		}
