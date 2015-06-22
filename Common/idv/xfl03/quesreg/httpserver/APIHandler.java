@@ -231,8 +231,48 @@ public class APIHandler {
 		}
 		return "Unknown error. Contact server administrator";
 		//return "Not finish.";
-		
-
+	}
+	//anyone can check if I wrote anything wrong below?   -Lucas
+	public String userinfo_admin(){
+		List<String> anything = uriAttributes.get("username");
+		if(!anything.isEmpty()){
+			ResultSet rs;
+			try {
+				rs = mainPool.mainDB.getUserResultsByAnyThing(anything.get(0));
+				return getUserInfo(rs);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "No such user.";
+	}
+	@SuppressWarnings("unused")
+	private String getUserInfo(ResultSet rs){
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append(rs.getString("username"));
+			sb.append(",");
+			sb.append(rs.getString("email"));
+			sb.append(",");
+			sb.append(rs.getInt("age"));
+			sb.append(",");
+			sb.append(rs.getString("regdate"));
+			sb.append(",");
+			sb.append(rs.getInt("veri"));
+			sb.append(",");
+			sb.append(rs.getInt("admin"));
+			sb.append(",");
+			sb.append(rs.getString("logdate"));
+			sb.append(",");
+			sb.append(rs.getString("logip"));
+			sb.append(",");
+			sb.append(rs.getString("code"));
+			return sb.toString();
+		} catch (Exception e) {
+			//lol
+		}
+		return null;
 	}
 	
 	private int booleanToInt(boolean b){
