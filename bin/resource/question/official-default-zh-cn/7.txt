@@ -3,6 +3,6 @@ question=Jeb的头发是什么样子?
 a=长发
 b=短发
 c=黑发
-d=谁是'Jeb'!!!
+d=棕发
 key=a
 type=1
