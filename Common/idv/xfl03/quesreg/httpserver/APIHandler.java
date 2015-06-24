@@ -42,7 +42,7 @@ public class APIHandler {
         if(target.startsWith("reg")){
         	return reg();
         }
-		return "API Not Found.";
+		return "<404>API Not Found.";
 	}
 	
 	public String login(){
@@ -51,10 +51,10 @@ public class APIHandler {
 				ResultSet rs0= mainPool.mainDB.getUserResultsByToken(token);
 				if(!rs0.next()){
 					token="";
-					return "Bad Token. [Not Find]";
+					return "<500>Bad Token. [Not Find]";
 				}
 				if(rs0.getString("logip").equalsIgnoreCase(clientIP)){
-					return "Have logined.";
+					return "Logined.";
 				}
 				token="";
 				return "Bad Token. [IP Changed] ";
@@ -73,7 +73,7 @@ public class APIHandler {
 			ResultSetMetaData   rsmd1 = rs.getMetaData();
 			int count = rsmd1.getColumnCount();
 			if(count==0){
-				return "Not exist user.";
+				return "User does not exist.";
 			}
 			if(rs.getString("password").equalsIgnoreCase(EncodeTool.encodeByMD5(password.get(0)))){
 				Calendar now = Calendar.getInstance();
@@ -109,7 +109,7 @@ public class APIHandler {
 	}
 	public String changepw(){
 		if(token.equalsIgnoreCase("")){
-			return "No Token.";
+			return "Illegal Token.";
 		}
 		try {
 			ResultSet rs=mainPool.mainDB.getUserResultsByToken(token);
@@ -145,7 +145,7 @@ public class APIHandler {
 					return "Bad Token. [Not Find]";
 				}
 				if(rs0.getString("logip").equalsIgnoreCase(clientIP)){
-					return "Have logined.";
+					return "Logined.";
 				}
 				token="";
 				return "Bad Token. [IP Changed] ";
@@ -180,11 +180,11 @@ public class APIHandler {
     			
 			rs= mainPool.mainDB.getUserResultsByUsername(username.get(0));
 			if(rs.next())
-				return "USER EXIST.";
+				return "USER DOES EXIST.";
 				
 			rs= mainPool.mainDB.getUserResultsByEmail(email.get(0));
 			if(rs.next())
-				return "EMAIL EXIST.";
+				return "EMAIL DOES EXIST.";
     			
 			Calendar now = Calendar.getInstance();  
 			String code=EncodeTool.encodeByMD5(username.get(0)+"CODE"+((int)(Math.random()*1000000000))+"CODE"+password.get(0));
