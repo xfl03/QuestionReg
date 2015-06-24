@@ -3,6 +3,6 @@ question=以下哪个和Minecraft有关的项目不基于 'Forge'?
 a=MCPC
 b=Sponge
 c=Spigot
-d=Bukkit
+d=Forge Server
 key=c
 type=1

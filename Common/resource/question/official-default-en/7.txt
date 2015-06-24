@@ -3,6 +3,6 @@ question=What does Jeb's hair look like?
 a=Long
 b=Short
 c=Black
-d=Who is 'Jeb'???
+d=Brown
 key=a
 type=1

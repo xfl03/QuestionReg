@@ -1,8 +1,8 @@
-#Please use UTF-8 /no BOM
+﻿#Please use UTF-8 /no BOM
 question=12边形的内角和是?
 a=1800
 b=1620
 c=1980
-d=什么是'内角和'??? 貌似不知道呢...
+d=2080
 key=a
 type=1
