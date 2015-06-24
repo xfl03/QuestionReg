@@ -3,6 +3,6 @@ question=Which programming languge does Minecraft PE use?
 a=Java
 b=C++
 c=C#
-d=What is 'programming language'??? DK!!!
+d=VB
 key=a
 type=1

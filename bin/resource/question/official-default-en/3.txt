@@ -3,6 +3,6 @@ question=Which project about Minecraft has received 'DMCA Takedown Notice'?
 a=Sponge
 b=Forge
 c=Spigot
-d=What is 'DMCA'??? DK!!!
+d=Bukkit
 key=c
 type=1
