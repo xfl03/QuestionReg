@@ -4,5 +4,5 @@ a=Java
 b=C++
 c=C#
 d=VB
-key=a
+key=b
 type=1
