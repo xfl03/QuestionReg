@@ -23,7 +23,7 @@ public class QuestionList {
 		this.md=md;
 		alq=new ArrayList<ArrayList<Question>>();
 		alq.add(null);
-		for(int i=1;i<=4;i++){
+		for(int i=1;i<=mc.questionTypes;i++){
 			alq.add(new ArrayList<Question>());
 		}
 		File[] subFolder=questionFolder.listFiles(qff1);
@@ -62,14 +62,14 @@ public class QuestionList {
 			}
 			File[] subFile=f.listFiles(qff0);
 			for(File f1 : subFile){
-				Question q=new Question(f1);
+				Question q=new Question(f1,mc);
 				alq.get(q.type).add(q);
 				//System.out.println(q.type+" "+q.question);
 				sum[q.type]++;
 			}
 		}
 		
-		for(int i=1;i<=4;i++){
+		for(int i=1;i<=mc.questionTypes;i++){
 			if(sum[i]<mc.questionNumber[i]){
 				System.out.println("TYPE "+i+" "+sum[i]+"/"+mc.questionNumber[i]);
 				for(int j=sum[i];j<mc.questionNumber[i];j++){
@@ -83,7 +83,7 @@ public class QuestionList {
 	public String getRandomQuestions(){
 		//System.out.println("getRandomQuestions");
 		StringBuilder sb=new StringBuilder();
-		for(int i=1;i<=4;i++){
+		for(int i=1;i<=mc.questionTypes;i++){
 			System.out.println(i);
 			int questionNumber=mc.questionNumber[i];
 			if(questionNumber==0){

@@ -11,6 +11,7 @@ public class MainData {
 	public File mainConfigFile=null;
 	public File webFolder=null;
 	public File languageFolder=null;
+	public File logFile=null;
 	public ResourceFileTool rft;
 	
 	public MainData(File DataFolder){
@@ -21,6 +22,7 @@ public class MainData {
     	databaseFolder=getSubFile(dataFolder,"database");
     	webFolder=getSubFile(dataFolder,"web");
     	languageFolder=getSubFile(dataFolder,"language");
+    	logFile=getSubFile(dataFolder,"QuestionReg.log");
     	
     	//First Time To Load Plugin
         if(!dataFolder.exists()){

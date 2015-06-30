@@ -1,6 +1,7 @@
 package idv.xfl03.quesreg.question;
 
 import idv.xfl03.quesreg.config.ConfigTool;
+import idv.xfl03.quesreg.config.MainConfig;
 
 import java.io.File;
 
@@ -17,7 +18,7 @@ public class Question {
 	public Question(int type){
 		this.type=type;
 	}
-	public Question(File questionFile){
+	public Question(File questionFile,MainConfig mc){
 		ConfigTool ct=new ConfigTool(questionFile);
 		question=ct.getStringConfig("question", question);
 		a=ct.getStringConfig("a", a);
@@ -26,7 +27,7 @@ public class Question {
 		d=ct.getStringConfig("d", d);
 		key=ct.getStringConfig("key", key);
 		type=ct.getIntConfig("type", type);
-		if(type<1||type>4){
+		if(type<1||type>mc.questionTypes){
 			System.out.println(type);
 			type=1;
 		}

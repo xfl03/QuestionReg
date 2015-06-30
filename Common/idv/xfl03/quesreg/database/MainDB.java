@@ -24,7 +24,7 @@ public class MainDB {
 						+ "password varchar(32),"
 						+ "token varchar(32),"
 						+ "code varchar(32),"
-						+ "email varchar(100), "
+						+ "email varchar(200), "
 						+ "age int,"
 						+ "regdate varchar(10),"
 						+ "logdate varchar(10),"
@@ -36,9 +36,10 @@ public class MainDB {
 						+ ");");
 				st.update("create table score("
 						+ "username varchar(20), "
-						+ "score int,"
+						+ "score varchar(1024),"
 						+ "ques varchar(1024),"
-						+ "date varchar(10)"
+						+ "date varchar(10),"
+						+ "time long"
 						+ ");");
 				st.update("create table version("
 						+ "version varchar(100)"
@@ -48,7 +49,7 @@ public class MainDB {
 						+ "'xfl03','593bbf1b91880577d26588095add4c72','3024da271ec6205fc3d364d87e8552bb','3024da271ec6205fc3d364d87e8552bb',"
 						+ "'1552775831',16,'2015-04-26','2015-05-15',1,1,1,'127.0.0.1','127.0.0.1');");
 				st.update("insert into score values("
-						+ "'xfl03',100,'5,1,2,4,3','2015-04-26');");
+						+ "'xfl03','100','5,1,2,4,3','2015-04-26',10000);");
 				st.update("insert into version values('"+QuestionReg.PLUGIN_VERSION+"');");
 				ResultSet rs = st.query("select * from user;");
 		        while(rs.next()){

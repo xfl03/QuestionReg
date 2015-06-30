@@ -8,6 +8,7 @@ import idv.xfl03.quesreg.data.MainData;
 import idv.xfl03.quesreg.database.MainDB;
 import idv.xfl03.quesreg.hash.EncodeTool;
 import idv.xfl03.quesreg.httpserver.HttpServerThread;
+import idv.xfl03.quesreg.log.MainLogger;
 import idv.xfl03.quesreg.question.QuestionList;
 
 public class QuestionReg{
@@ -24,6 +25,11 @@ public class QuestionReg{
         //Init Main Data
         File dataFolder=new File("plugins/QuestionReg");
         mainPool.mainData=new MainData(dataFolder);
+        
+        //Init Main Logger
+        mainPool.mainLogger=new MainLogger(mainPool.mainData.logFile);
+        mainPool.mainLogger.info("233");
+        mainPool.mainLogger.waring(new Exception("322"));
         
         //Init Main Config
         mainPool.mainConfig=new MainConfig(mainPool.mainData.mainConfigFile);
