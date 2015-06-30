@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=Which project about Minecraft has received 'DMCA Takedown Notice'?
-a=Sponge
-b=Forge
-c=Spigot
-d=Bukkit
-key=c
-type=1

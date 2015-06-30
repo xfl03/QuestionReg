@@ -1,7 +1,0 @@
-question=Railcraft的焦炉的副产物为？
-a=焦油
-b=润滑油
-c=木馏油
-d=燃油
-key=c
-type=1

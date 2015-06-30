@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=Minecraft 1.7+ 使用了以下哪个网络传输支持库? 
-a=jboss
-b=netty
-c=commons io
-d=Raklib
-key=b
-type=1

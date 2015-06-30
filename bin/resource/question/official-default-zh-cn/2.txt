@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=Minecraft PE 使用了哪种程序语言?
-a=Java
-b=C++
-c=C#
-d=VB
-key=b
-type=1

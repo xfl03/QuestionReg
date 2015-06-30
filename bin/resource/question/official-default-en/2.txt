@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=Which programming languge does Minecraft PE use?
-a=Java
-b=C++
-c=C#
-d=VB
-key=b
-type=1

@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=What does Jeb's hair look like?
-a=Long
-b=Short
-c=Black
-d=Brown
-key=a
-type=1

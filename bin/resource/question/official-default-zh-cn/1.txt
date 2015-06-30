@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=欲启动 Minecraft PC，需如下哪个运行时?
-a=VC++ 2012
-b=JRE 1.7
-c=.NET 4.0
-d=Python 2.3.7
-key=b
-type=1

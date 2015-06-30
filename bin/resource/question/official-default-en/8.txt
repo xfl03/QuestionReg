@@ -1,8 +1,0 @@
-﻿#Please use UTF-8 /no BOM
-question=Which Minecraft Edition is open-source?
-a=Minecraft PC
-b=Minecraft PE
-c=Minecraft PI
-d=Minecraft PS
-key=c
-type=1
