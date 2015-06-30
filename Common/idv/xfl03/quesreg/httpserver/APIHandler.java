@@ -2,7 +2,6 @@ package idv.xfl03.quesreg.httpserver;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class APIHandler {
         if(target.startsWith("reg")){
         	return reg();
         }
-		return "<404>API Not Found.";
+		return "API Not Found.";
 	}
 	
 	public String login(){
@@ -51,7 +50,7 @@ public class APIHandler {
 				ResultSet rs0= mainPool.mainDB.getUserResultsByToken(token);
 				if(!rs0.next()){
 					token="";
-					return "<500>Bad Token. [Not Find]";
+					return "Bad Token. [Not Find]";
 				}
 				if(rs0.getString("logip").equalsIgnoreCase(clientIP)){
 					return "Logined.";
@@ -223,13 +222,11 @@ public class APIHandler {
 				rs = mainPool.mainDB.getUserResultsByAnyThing(anything.get(0));
 				return getUserInfo(rs);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return "No such user.";
 	}
-	@SuppressWarnings("unused")
 	private String getUserInfo(ResultSet rs){
 		try {
 			StringBuilder sb = new StringBuilder();

@@ -42,6 +42,10 @@ public class QRCommandHandler {
 			res.attendReturnText("Verify a user(User must have been created)");
 			res.attendReturnText("/qr verify <username/code/"+mainPool.mainConfig.getEmailSupportString()+">");
 			res.attendBlankLineToReturnText();
+			
+			res.attendReturnText("Get user info (User must have been created)");
+			res.attendReturnText("/qr info <username/code/"+mainPool.mainConfig.getEmailSupportString()+">");
+			res.attendBlankLineToReturnText();
 
 			res.attendReturnText("Set Admin (User must have been created)");
 			res.attendReturnText("/qr admin <username>");
@@ -154,6 +158,15 @@ public class QRCommandHandler {
 				res.attendReturnText("[ERROR] "+e.getMessage());
 				return res;
 			}
+		}
+		if(req.args[0].equalsIgnoreCase("info")){
+			if(req.args.length==1){
+				res.attendReturnText("Get user info (User must have been created)");
+				res.attendReturnText("/qr info <username/code/"+mainPool.mainConfig.getEmailSupportString()+">");
+				res.attendBlankLineToReturnText();
+				return res;
+			}
+			//TODO Add Code Here
 		}
 		if(req.args[0].equalsIgnoreCase("admin")){
 			if(req.args.length==1){

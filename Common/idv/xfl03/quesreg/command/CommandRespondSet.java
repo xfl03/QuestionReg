@@ -35,5 +35,4 @@ public class CommandRespondSet {
 			return EMPTY_RETURN_TEXT;
 		}
 	}
-	
 }
