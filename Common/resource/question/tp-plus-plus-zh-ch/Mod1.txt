@@ -1,7 +1,7 @@
 ﻿#Please use UTF-8 /no BOM
 question=GregTech5的汉化者是？
 a=TehporP/derekchan/Zhanghandsome
-b=TehproP/derekchan/Zhanghandsome
+b=Jeb
 c=Tiramisu
 d=Marco_V
 key=a

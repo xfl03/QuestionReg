@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=你能不能在格雷科技5的存在下合成出工业EXP打粉机？
+a=能
+b=不能
+c=也许能
+d=看人品
+key=b
+type=1

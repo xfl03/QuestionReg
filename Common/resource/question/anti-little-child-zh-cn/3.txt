@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=在直角三角形ABC中，角C＝90度 AB=10 BC=6 求角ABC的正切值
+a=0.6
+b=0.8
+c=0.75
+d=0.37
+key=a
+type=1

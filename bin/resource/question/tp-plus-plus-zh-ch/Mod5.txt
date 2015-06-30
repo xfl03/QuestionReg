@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=以下哪种dEbUFF是神秘时代特有的？
+a=反常之饥 
+b=辐射 
+c=隐身 
+d=速掘
+key=a
+type=1

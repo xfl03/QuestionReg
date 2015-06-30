@@ -1,0 +1,7 @@
+question=已知某低压机器加工一次需要800eu,用电功率为2eu/t,可得其加工时间为
+a=20s
+b=20tick
+c=40s
+d=10s
+key=a
+type=1

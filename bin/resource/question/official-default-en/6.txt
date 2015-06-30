@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=Where does Minecraft Official File storage?
+a=MediaFire
+b=DropBox
+c=CloudFlare
+d=Amazon
+key=d
+type=1

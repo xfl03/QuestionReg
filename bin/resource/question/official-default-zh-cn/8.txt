@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=以下哪个Minecraft版本是开源的?
+a=Minecraft PC
+b=Minecraft PE
+c=Minecraft PI
+d=Minecraft PS
+key=c
+type=1

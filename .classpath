@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="src" path="Common"/>
 	<classpathentry kind="src" path="BukkitAPI"/>
-	<classpathentry kind="lib" path="../../java-lib/org/bukkit/cauldron-api/cauldron-api-1.7.10-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="../../java-lib/net/minecraft/minecraft_server.1.7.10.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="../../java-lib/com/avaje/ebean-2.7.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Lucas/Desktop/Development/JavaLib/cauldron-api-1.7.10-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/Users/Lucas/Desktop/Development/JavaLib/minecraft_server.1.7.10.jar"/>
+	<classpathentry kind="lib" path="/Users/Lucas/Desktop/Development/JavaLib/ebean-2.7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,7 @@
+question=HSLA钢产于RotrayCraft模组里的高炉,请问ROC高炉会因为温度过高而爆炸吗
+a=不会
+b=会
+c=处于下界会爆炸
+d=处于沙漠地带会爆炸
+key=a
+type=1

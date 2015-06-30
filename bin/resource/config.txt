@@ -1,0 +1,41 @@
+#QuestionReg Main Configuration
+#QuestionReg 1.0.0-4-3
+#2015.5.23 20:00(GMT+8)
+#Please use UTF-8 /no BOM
+
+#If user's score reaches to this, user will pass the examination
+#0-100
+passing-score=80
+
+#The number of questions in exam for user
+#>0
+#question-number-%type%=
+#type:1-4
+question-number-1=5
+question-number-2=0
+question-number-3=0
+question-number-4=0
+
+#If user should be verified by administration before join game
+#In other word, if it is true, user cannot join game before verified by admin 
+need-admin-verify=false
+
+#Display Language
+#Support 'en', 'zh-cn'
+language=en
+
+#Port to run Http Server
+#1-65535 (Please use an unused port)
+#If your server is in P.R.China, please not use port 80
+http-server-port=1024
+
+#Email pattern which can be support
+#1-Email Only 2-QQ Only 3-Both Email&QQ
+email-support=3
+
+#Who can give user QuestionReg admin
+#0-Console Only 1-Both Console&Admin(Not OP)
+give-admin-permission=0
+
+#If use code, you can verify identify of user when joining group.
+use-code=true

@@ -1,0 +1,7 @@
+question=帝皇蜂(Imperial)是由那两个蜜蜂杂交出来的?
+a=田野(Cultivated) 和 寻常(Common)
+b=寻常(Common) 和 高尚(Noble)
+c=高尚(Noble) 和 庄严(Majestic)
+d=庄严(Majestic) 和 寻常(Common)
+key=c
+type=1

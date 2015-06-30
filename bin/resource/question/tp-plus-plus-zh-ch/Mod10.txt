@@ -1,0 +1,7 @@
+question=制作一个大蜂箱(由蜂箱组Alveary构成)需要大量的蜂蜜，问这些蜂蜜需要提取大概几组的蜂蜜滴(Honey Drop)/蜂蜜汁(Honnydew)?
+a=9组
+b=13组
+c=17组
+d=21组
+key=c
+type=1

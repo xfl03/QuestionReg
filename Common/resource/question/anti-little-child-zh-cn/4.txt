@@ -1,0 +1,8 @@
+﻿#Please use UTF-8 /no BOM
+question=圆形面积的计算公式?
+a=pi*r*r
+b=pi*d
+c=pi*d*d
+d=pi*d*d/2
+key=a
+type=1
