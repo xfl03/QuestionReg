@@ -227,6 +227,27 @@ public class APIHandler {
 		}
 		return "No such user.";
 	}
+	public String userpast(){
+		if(token==null){
+			return "User doesn't exist!";
+		}
+		ResultSet rs;
+		ResultSet rs1;
+		try {
+			rs1=mainPool.mainDB.getUserResultsByToken(token);
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT * FROM score WHERE username=");
+			sb.append("'");
+			sb.append(rs1.getString("username"));
+			sb.append("'");
+			rs = mainPool.mainDB.st.query(sb.toString());
+			return "???";
+		}
+		catch(Exception e){
+			//lol
+		}
+		return "Unknown error.";
+	}
 	private String getUserInfo(ResultSet rs){
 		try {
 			StringBuilder sb = new StringBuilder();
