@@ -3,6 +3,9 @@
 #2015.5.26 11:00(GMT+8)
 #Please use UTF-8 /no BOM
 
+#How many times user can attempt to ask questions
+exam-times=3
+
 #The number of types of questions
 #>0
 question-types=1

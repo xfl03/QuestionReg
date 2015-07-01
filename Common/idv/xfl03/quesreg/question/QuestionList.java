@@ -96,6 +96,8 @@ public class QuestionList {
 		}
 		
 	}
+	
+	//For Database and display (like APIHandler)
 	public String getRandomQuestions(){
 		//System.out.println("getRandomQuestions");
 		StringBuilder sb=new StringBuilder();
@@ -132,15 +134,17 @@ public class QuestionList {
 			if(sb.length()>0){
 				sb.append(",");
 			}
-			sb.append(idsToString(id));
+			sb.append(intsToString(id));
 		}
 		return sb.toString();
 	}
+	
 	public Question getQuestion(int id){
 		int type=id/SPLIT_BASIC;
 		int i=id%SPLIT_BASIC;
 		return alq.get(type).get(i-1);
 	}
+	
 	public int[] getIds(String ids){
 		String[] temp=ids.split(",");
 		int[] id=new int[temp.length];
@@ -148,6 +152,11 @@ public class QuestionList {
 			id[i]=Integer.parseInt(temp[i]);
 		}
 		return id;
+	}
+	
+	//For Database and display (like APIHandler)
+	public String getScore(String questions,String answers){
+		return intsToString(getScore(getIds(questions),answers.split(",")));
 	}
 	public int[] getScore(int[] questions,String[] answers){
 		int[] temp=new int[mc.scoreModules];
@@ -179,6 +188,11 @@ public class QuestionList {
 		}
 		return temp;
 	}
+	
+	//For Database and display (like APIHandler)
+	public boolean isPass(String score){
+		return isPass(getIds(score));
+	}
 	public boolean isPass(int[] score){
 		if(score.length!=mc.scoreModules)
 			return false;
@@ -201,7 +215,7 @@ public class QuestionList {
 		}
 		return false;
 	}
-	private String idsToString(int[] array){
+	private String intsToString(int[] array){
 		StringBuilder sb=new StringBuilder();
 		sb.append(array[0]);
 		for(int i=1;i<array.length;i++){

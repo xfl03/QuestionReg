@@ -208,10 +208,8 @@ public class APIHandler {
 			rs = mainPool.mainDB.getUserResultsByToken(token);
 			return getUserInfo(rs);
 		} catch (Exception e) {
-			//lol
+			return "SQL ERROR."+e.getMessage();
 		}
-		return "Unknown error. Contact server administrator";
-		//return "Not finish.";
 	}
 	//anyone can check if I wrote anything wrong below?   -Lucas
 	public String userinfo_admin(){
@@ -241,12 +239,19 @@ public class APIHandler {
 			sb.append(rs1.getString("username"));
 			sb.append("'");
 			rs = mainPool.mainDB.st.query(sb.toString());
-			return "???";
+			int times=0;
+			StringBuilder temp0=new StringBuilder();
+			while(rs.next()){
+				times++;
+				temp0.append(",");
+				temp0.append(rs.getString("score").replaceAll(",", "."));
+			}
+			
+			return times+","+(mainPool.mainConfig.examTimes-times)+temp0.toString();
 		}
 		catch(Exception e){
-			//lol
+			return "SQL ERROR."+e.getMessage();
 		}
-		return "Unknown error.";
 	}
 	private String getUserInfo(ResultSet rs){
 		try {
@@ -270,9 +275,8 @@ public class APIHandler {
 			sb.append(rs.getString("code"));
 			return sb.toString();
 		} catch (Exception e) {
-			//lol
+			return "SQL ERROR."+e.getMessage();
 		}
-		return null;
 	}
 	
 	private int booleanToInt(boolean b){

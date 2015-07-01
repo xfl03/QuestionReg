@@ -5,6 +5,8 @@ import java.io.File;
 public class MainConfig {
 	
 	//Default
+	//Comments are in 'config.txt'
+	public int examTimes=3;
 	public int questionTypes=1;
 	public int[] questionNumber;
 	public int scoreModules=1;
@@ -22,6 +24,8 @@ public class MainConfig {
 	
 	public MainConfig(File configFile){
 		config=new ConfigTool(configFile);
+		
+		examTimes=config.getIntConfig("exam-times", examTimes);
 		questionTypes=config.getIntConfig("question-types", questionTypes);
 		scoreModules=config.getIntConfig("score-modules", scoreModules);
 		needAdminVerify=config.getBooleanConfig("", needAdminVerify);
@@ -50,6 +54,8 @@ public class MainConfig {
 			passingScore[i]=config.getIntConfig("passing-score-"+i, 0);
 		}
 	}
+	
+	//Get the text about email support
 	public String getEmailSupportString(){
 		switch(emailSupport){
 		case 1:
@@ -61,6 +67,8 @@ public class MainConfig {
 			return "email/qq";
 		}
 	}
+	
+	//Tool
 	private int[] stringToInts(String str){
 		String[] tmp=str.split(",");
 		int[] tmp2=new int[tmp.length];
