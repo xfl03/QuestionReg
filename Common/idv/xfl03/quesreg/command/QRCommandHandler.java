@@ -8,6 +8,33 @@ import idv.xfl03.quesreg.hash.EncodeTool;
 
 public class QRCommandHandler {
 	private MainPool mainPool;
+	private String getUserInfo(ResultSet rs){
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append(rs.getString("username"));
+			sb.append(",");
+			sb.append(rs.getString("email"));
+			sb.append(",");
+			sb.append(rs.getInt("age"));
+			sb.append(",");
+			sb.append(rs.getString("regdate"));
+			sb.append(",");
+			sb.append(rs.getInt("veri"));
+			sb.append(",");
+			sb.append(rs.getInt("admin"));
+			sb.append(",");
+			sb.append(rs.getString("logdate"));
+			sb.append(",");
+			sb.append(rs.getString("logip"));
+			sb.append(",");
+			sb.append(rs.getString("code"));
+			return sb.toString();
+		} catch (Exception e) {
+			//lol
+		}
+		return null;
+	}
+	
 	public QRCommandHandler(MainPool mainPool) {
 		this.mainPool=mainPool;
 	}
@@ -166,7 +193,20 @@ public class QRCommandHandler {
 				res.attendBlankLineToReturnText();
 				return res;
 			}
-			//TODO Add Code Here
+			if(mainPool.mainConfig.giveAdminPermission==0){
+				if(!req.sender.equalsIgnoreCase(CommandRequestSet.CONSOLE)){
+					res.attendReturnText("No permission! Please use this command in console!");
+					return res;
+				}
+			}
+		    String anything = req.args[1];
+		    try {
+				ResultSet r=mainPool.mainDB.getUserResultsByAnyThing(anything);
+				res.attendReturnText(this.getUserInfo(rs));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(req.args[0].equalsIgnoreCase("admin")){
 			if(req.args.length==1){
