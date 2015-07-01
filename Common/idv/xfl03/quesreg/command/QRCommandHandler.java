@@ -201,7 +201,7 @@ public class QRCommandHandler {
 			}
 		    String anything = req.args[1];
 		    try {
-				ResultSet r=mainPool.mainDB.getUserResultsByAnyThing(anything);
+				ResultSet rs=mainPool.mainDB.getUserResultsByAnyThing(anything);
 				res.attendReturnText(this.getUserInfo(rs));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
