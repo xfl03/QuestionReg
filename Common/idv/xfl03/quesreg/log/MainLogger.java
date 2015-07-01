@@ -10,7 +10,7 @@ import java.util.logging.Level;
  
 public class MainLogger {
 	private static final int LOWEST_DISPLAY_LEVEL=Level.INFO.intValue();
-	SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("syyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private BufferedWriter writer;
 	public MainLogger(File logFile){
 		try {

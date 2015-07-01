@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class QuestionList {
-	public ArrayList<ArrayList<Question>> alq;
-	public int[] sum={-1,0,0,0,0};
+	public ArrayList<ArrayList<Question>> alq;//[type][index]
+	public int[] sum;
 	
 	private final static QuestionFileFilter qff0=new QuestionFileFilter();;
 	private final static QuestionFolderFilter qff1=new QuestionFolderFilter();
@@ -21,13 +21,18 @@ public class QuestionList {
 	public QuestionList(File questionFolder,MainConfig mc,MainData md){
 		this.mc=mc;
 		this.md=md;
+		
+		//init arrays
+		sum=new int[mc.questionTypes];
 		alq=new ArrayList<ArrayList<Question>>();
 		alq.add(null);
 		for(int i=1;i<=mc.questionTypes;i++){
 			alq.add(new ArrayList<Question>());
+			sum[i]=0;
 		}
+
+		//init lists
 		File[] subFolder=questionFolder.listFiles(qff1);
-		
 		if(subFolder.length==0){
 			//First time
 			System.out.println("Init Questions!");
@@ -101,20 +106,20 @@ public class QuestionList {
 				//System.out.println(i+" Needs Nothing");
 				continue;
 			}
-			int[] id=new int[questionNumber];
+			int[] id=new int[questionNumber];//Question List
 			System.out.println(mc.questionNumber.length+" "+id.length+" "+i);
 			
 			for(int j=0;j<questionNumber;j++){
 				//int max=alq.get(i).size();
-				int temp=i*SPLIT_BASIC+getRandom(1,questionNumber);
+				int temp=i*SPLIT_BASIC+getRandom(1,questionNumber);//Get Random Question
 				int loopCount=0;
-				while(isUsed(id,temp)&&loopCount<=questionNumber){
+				while(isUsed(id,temp)&&loopCount<=questionNumber){//If Question has already in the list
 					loopCount++;
-					temp=i*10000+getRandom(1,alq.get(i).size()-1);
+					temp=i*10000+getRandom(1,alq.get(i).size()-1);//get random again
 				}
 				if(isUsed(id,temp)){
-					//Too much Loop Times
-					for(int k=i*SPLIT_BASIC+1;i<=i*SPLIT_BASIC+questionNumber;i++){
+					//If Too much Loop Times
+					for(int k=i*SPLIT_BASIC+1;i<=i*SPLIT_BASIC+questionNumber;i++){//Find a question not in the list
 						if(!isUsed(id,k)){
 							temp=k;
 							break;
@@ -144,6 +149,47 @@ public class QuestionList {
 		}
 		return id;
 	}
+	public int[] getScore(int[] questions,String[] answers){
+		int[] temp=new int[mc.scoreModules];
+		int[] temp3=new int[mc.scoreModules];
+		if(questions.length!=answers.length)
+			return temp;
+		int[] temp2=new int[questions.length];
+		int index=0;
+		for(int i=0;i<questions.length;i++){//Check Answer
+			if(getQuestion(questions[i]).key.equalsIgnoreCase(answers[i])){
+				temp2[index]=questions[i];
+				index++;
+			}
+		}
+		for(int i=0;i<index;i++){//Find every correct question module
+			for(int j=1;j<=mc.scoreModules;j++){//Find in every module
+				temp3[j-1]=getQuestionNumber(j);
+				int[] set=mc.scoreModule[j];
+				for(int k=0;k<set.length;k++){
+					if(getQuestion(temp2[i]).type==set[k]){
+						temp[j-1]++;
+						break;
+					}
+				}
+			}
+		}
+		for(int i=0;i<temp.length;i++){//get true score (correct / all)
+			temp[i]=(int)(temp[i]/temp3[i]);
+		}
+		return temp;
+	}
+	public boolean isPass(int[] score){
+		if(score.length!=mc.scoreModules)
+			return false;
+		for(int i=0;i<score.length;i++){
+			if(score[i]<mc.passingScore[i])
+				return false;
+		}
+		return true;
+	}
+	
+	//Tools begin
 	private int getRandom(int min,int max){
 		return (int)(Math.random()*(max-min+1))+min;
 	}
@@ -163,5 +209,21 @@ public class QuestionList {
 			sb.append(""+array[i]);
 		}
 		return sb.toString();
+	}
+	private int getQuestionNumber(int module){
+		int temp=0;
+		int[]temp2=mc.scoreModule[module];
+		for(int j=0;j<temp2.length;j++){
+			int type=temp2[j];
+			if(type==0){
+				temp=0;
+				for(int i=1;i<=mc.questionTypes;i++){
+					temp+=mc.questionNumber[i];
+				}
+				return temp;
+			}
+			temp+=mc.questionNumber[type];
+		}
+		return temp;
 	}
 }
