@@ -233,12 +233,33 @@ public class APIHandler {
 		ResultSet rs1;
 		try {
 			rs1=mainPool.mainDB.getUserResultsByToken(token);
+			return getUserPast(rs1);
+		}
+		catch(Exception e){
+			return "SQL ERROR."+e.getMessage();
+		}
+	}
+	public String userpast_admin(){
+		List<String> username = uriAttributes.get("username");
+		if(!username.isEmpty()){
+			ResultSet rs;
+			try {
+				rs = mainPool.mainDB.getUserResultsByUsername(username.get(0));
+				return getUserPast(rs);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return "No such user.";
+	}
+	private String getUserPast(ResultSet rs1){
+		try {
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM score WHERE username=");
 			sb.append("'");
 			sb.append(rs1.getString("username"));
 			sb.append("'");
-			rs = mainPool.mainDB.st.query(sb.toString());
+			ResultSet rs = mainPool.mainDB.st.query(sb.toString());
 			int times=0;
 			StringBuilder temp0=new StringBuilder();
 			while(rs.next()){
