@@ -2,6 +2,7 @@ package idv.xfl03.quesreg.httpserver;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -251,6 +252,18 @@ public class APIHandler {
 			}
 		}
 		return "No such user.";
+	}
+	public String userques(){
+		int total = 0;
+		List<Integer> questions = new ArrayList<Integer>();
+		for(int a:mainPool.mainConfig.questionNumber){
+			total+=a;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(total);
+		sb.append(",");
+		sb.append(mainPool.questionList.getRandomQuestions());
+		return sb.toString();
 	}
 	private String getUserPast(ResultSet rs1){
 		try {
