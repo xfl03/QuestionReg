@@ -85,6 +85,7 @@ public class QRCommandHandler {
 			res.attendReturnText("Whitelist a user(User can have not been created)");
 			res.attendReturnText("/qr whitelist <username>");
 			res.attendBlankLineToReturnText();
+			//TODO /qr blacklist
 			return res;
 		}
 		if(req.args[0].equalsIgnoreCase("reg")){
