@@ -45,6 +45,7 @@ public class MainDB {
 						+ "version varchar(100)"
 						+ ");");
 				
+				//For test
 				st.update("insert into user values("
 						+ "'xfl03','593bbf1b91880577d26588095add4c72','3024da271ec6205fc3d364d87e8552bb','3024da271ec6205fc3d364d87e8552bb',"
 						+ "'1552775831',16,'2015-04-26','2015-05-15',1,1,1,'127.0.0.1','127.0.0.1');");
@@ -103,7 +104,7 @@ public class MainDB {
 	
 	
 	public ResultSet getScoreResultsByUsername(String username) throws Exception{
-		return st.query("select * from score where username = '"+username+"' ;");
+		return st.query("select * from score where username = '"+username+"' ORDER BY time DESC;");
 	}
 	
 }

@@ -15,6 +15,7 @@ public class QuestionList {
 	private final static QuestionFileFilter qff0=new QuestionFileFilter();;
 	private final static QuestionFolderFilter qff1=new QuestionFolderFilter();
 	private final static int SPLIT_BASIC=10000;
+	private final static String SPLIT_LINE="{SPLITLINE}";
 	
 	private MainConfig mc;
 	private MainData md;
@@ -139,6 +140,10 @@ public class QuestionList {
 		return sb.toString();
 	}
 	
+	public String getQuestion(String id){
+		Question q=getQuestion(Integer.parseInt(id));
+		return q.question+SPLIT_LINE+q.a+SPLIT_LINE+q.b+SPLIT_LINE+q.c+SPLIT_LINE+q.d;
+	}
 	public Question getQuestion(int id){
 		int type=id/SPLIT_BASIC;
 		int i=id%SPLIT_BASIC;

@@ -2,8 +2,9 @@ package idv.xfl03.quesreg.httpserver;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +40,22 @@ public class APIHandler {
 		if(target.startsWith("changepw")){
         	return changepw();
         }
-        if(target.startsWith("reg")){
-        	return reg();
+		if(target.startsWith("userinfoa")){
+        	return userinfo_admin();
         }
+        if(target.startsWith("userinfo")){
+        	return userinfo();
+        }
+        if(target.startsWith("userpasta")){
+        	return userpast_admin();
+        }
+        if(target.startsWith("userpast")){
+        	return userpast();
+        }
+        if(target.startsWith("userques")){
+        	return userques();
+        }
+        
 		return "API Not Found.";
 	}
 	
@@ -202,7 +216,7 @@ public class APIHandler {
 	}
 	public String userinfo(){
 		if(token == null){
-			return "User doesn't exist!";
+			return "Bad Request";
 		}
 		ResultSet rs;
 		try {
@@ -214,23 +228,37 @@ public class APIHandler {
 	}
 	//anyone can check if I wrote anything wrong below?   -Lucas
 	public String userinfo_admin(){
-		List<String> anything = uriAttributes.get("username");
+		if(token==null){
+			return "Bad Request";
+		}
+		try {
+			ResultSet rs0=mainPool.mainDB.getUserResultsByToken(token);
+			if(rs0==null){
+				return "Bad Request";
+			}
+			if(rs0.getInt("admin")!=1){
+				return "Not Admin";
+			}
+		} catch (Exception e1) {
+			return "SQL ERROR."+e1.getMessage();
+		}
+		
+		List<String> anything = uriAttributes.get("input");
 		if(!anything.isEmpty()){
 			ResultSet rs;
 			try {
 				rs = mainPool.mainDB.getUserResultsByAnyThing(anything.get(0));
 				return getUserInfo(rs);
 			} catch (Exception e) {
-				e.printStackTrace();
+				return "SQL ERROR."+e.getMessage();
 			}
 		}
 		return "No such user.";
 	}
 	public String userpast(){
 		if(token==null){
-			return "User doesn't exist!";
+			return "Bad Request";
 		}
-		ResultSet rs;
 		ResultSet rs1;
 		try {
 			rs1=mainPool.mainDB.getUserResultsByToken(token);
@@ -241,6 +269,20 @@ public class APIHandler {
 		}
 	}
 	public String userpast_admin(){
+		if(token==null){
+			return "Bad Request";
+		}
+		try {
+			ResultSet rs0=mainPool.mainDB.getUserResultsByToken(token);
+			if(!rs0.next()){
+				return "Bad Request";
+			}
+			if(rs0.getInt("admin")!=1){
+				return "Not Admin";
+			}
+		} catch (Exception e1) {
+			return "SQL ERROR."+e1.getMessage();
+		}
 		List<String> username = uriAttributes.get("username");
 		if(!username.isEmpty()){
 			ResultSet rs;
@@ -249,24 +291,92 @@ public class APIHandler {
 				return getUserPast(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
+				return "SQL ERROR."+e.getMessage();
 			}
 		}
 		return "No such user.";
 	}
 	public String userques(){
+		ResultSet rs;
+		try {
+			rs=mainPool.mainDB.getUserResultsByToken(token);
+			if(!rs.next()){
+				return "Bad Request";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "SQL ERROR."+e.getMessage();
+		}
 		int total = 0;
-		List<Integer> questions = new ArrayList<Integer>();
 		for(int a:mainPool.mainConfig.questionNumber){
 			total+=a;
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(total);
 		sb.append(",");
-		sb.append(mainPool.questionList.getRandomQuestions());
+		String s=mainPool.questionList.getRandomQuestions();
+		sb.append(s);
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			mainPool.mainDB.st.update("INSERT into score values('"+rs.getString("username")+"','-1','"+s+"','"+dateFormat.format(new Date())+"',"+System.currentTimeMillis()+",);");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "SQL ERROR."+e.getMessage();
+		}
 		return sb.toString();
 	}
+	public String question(){
+		if(token==null){
+			return "Bad Request";
+		}
+		List<String> q = uriAttributes.get("q");
+		String que=q.get(0);
+		return mainPool.questionList.getQuestion(que);
+	}
+	public String answer(){
+		if(token==null){
+			return "Bad Request";
+		}
+		ResultSet rs,rs2;
+		String username;
+		try {
+			rs=mainPool.mainDB.getUserResultsByToken(token);
+			if(!rs.next()){
+				return "Bad Request";
+			}
+			username=rs.getString("username");
+			rs2=mainPool.mainDB.getScoreResultsByUsername(username);
+			if(!rs2.next()){
+				return "No Question Found";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "SQL ERROR."+e.getMessage();
+		}
+		List<String> a = uriAttributes.get("a");
+		String que=a.get(0);
+		String scores;
+		boolean pass;
+		try {
+			scores = mainPool.questionList.getScore(rs2.getString("ques"), que);
+			pass=mainPool.questionList.isPass(scores);
+			if(pass){
+				mainPool.mainDB.st.update("UPDATE user SET status='1' WHERE username='"+username+"';");
+			}
+			mainPool.mainDB.st.update("UPDATE score SET score='"+scores+"' WHERE username='"+username+"' AND time="+rs2.getLong("time")+" ;");
+		} catch(Exception e) {
+			return "SQL ERROR."+e.getMessage();
+		}
+		
+		return scores+","+booleanToInt(pass);
+	}
+	
+	//Tools
 	private String getUserPast(ResultSet rs1){
 		try {
+			if(!rs1.next()){
+				return "Bad Request";
+			}
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT * FROM score WHERE username=");
 			sb.append("'");
@@ -289,6 +399,9 @@ public class APIHandler {
 	}
 	private String getUserInfo(ResultSet rs){
 		try {
+			if(!rs.next()){
+				return "Bad Request";
+			}
 			StringBuilder sb = new StringBuilder();
 			sb.append(rs.getString("username"));
 			sb.append(",");
@@ -307,6 +420,8 @@ public class APIHandler {
 			sb.append(rs.getString("logip"));
 			sb.append(",");
 			sb.append(rs.getString("code"));
+			sb.append(",");
+			sb.append(rs.getString("status"));
 			return sb.toString();
 		} catch (Exception e) {
 			return "SQL ERROR."+e.getMessage();
