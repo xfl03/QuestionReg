@@ -28,6 +28,9 @@ public class APIHandler {
 		if(target.startsWith("login")){
         	return login();
         }
+		if(target.startsWith("reg")){
+        	return reg();
+        }
 		if(target.startsWith("userexist")){
         	return userexist();
         }
