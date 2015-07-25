@@ -55,6 +55,12 @@ public class APIHandler {
         if(target.startsWith("userques")){
         	return userques();
         }
+        if(target.startsWith("question")){
+        	return question();
+        }
+        if(target.startsWith("answer")){
+        	return answer();
+        }
         
 		return "API Not Found.";
 	}
