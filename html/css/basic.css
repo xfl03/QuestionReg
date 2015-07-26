@@ -1,0 +1,16 @@
+.modal-backdrop.in{
+    opacity: 1 !important;
+}
+.checkbox input[type=checkbox]:checked + label:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e013";
+}
+.checkbox label:after {
+    padding-left: 0;
+    padding-top: 7px;
+    width: 15px;
+    font-size: 9px;
+}
+button.add-list{
+    width:80px;
+}
