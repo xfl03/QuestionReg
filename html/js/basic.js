@@ -84,8 +84,12 @@ $(document).ready(function () {
             success: function (data) {
                 var infoArray = data.split(',');
                 var isAdmin = infoArray[5];
+                var passed = infoArray[9];
                 if (isAdmin == '1') {
                     $('.adminOnly').removeClass('hidden');
+                }
+                if (passed == '1') {
+                    $('#startButton').addClass('hidden');
                 }
                 showInfo(data);
                 $('#loginModal').modal('hide');
@@ -116,6 +120,7 @@ $(document).ready(function () {
         var lastLoginDate = infoArray[6];
         var lastLoginIp = infoArray[7];
         var code = infoArray[8];
+        var passed = infoArray[9]
         $('#infoUsername').text(username);
         $('#infoQQ').text(qq);
         $('#infoAge').text(age);
@@ -124,6 +129,11 @@ $(document).ready(function () {
         $('#infoLastLoginDate').text(lastLoginDate);
         $('#infoLastLoginIp').text(lastLoginIp);
         $('#infoCode').val(code);
+        if (passed == '1') {
+            $('#infoPassed').text('Passed');
+        }else{
+            $('#infoPassed').text('Not Passed')
+        }
 
     }
 
